@@ -1,0 +1,28 @@
+import Logout from "@/components/uis/logout";
+import { validateRequest } from "@/lib/auth";
+import { getUser } from "@/lib/data/user";
+
+export default async function Page({
+  params,
+}: {
+  params: { username: string };
+}) {
+  const userInfo = await getUser(params.username);
+  const { user } = await validateRequest();
+
+  return (
+    <main>
+      {userInfo ? (
+        <h1>{userInfo.username}</h1>
+      ) : (
+        <p className="text-muted-foreground">No User</p>
+      )}
+      {user?.username === userInfo?.username ? (
+        <h1>same</h1>
+      ) : (
+        <p className="text-muted-foreground">Not same</p>
+      )}
+      {user && <Logout />}
+    </main>
+  );
+}
