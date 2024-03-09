@@ -15,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { createUser } from "./action";
+import { useState } from "react";
+import { RotateCw } from "lucide-react";
 
 const formSchema = z.object({
   username: z
@@ -42,6 +44,7 @@ const formSchema = z.object({
 });
 
 export default function SignUpForm() {
+  const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -60,12 +63,18 @@ export default function SignUpForm() {
         password,
       };
 
+      setLoading(true);
+
       const res = await createUser(formData);
       if (res?.error === "Invalid username.") {
         toast.error("Invalid username.");
       }
       if (res?.error === "Invalid password.") {
         toast.error("Invalid password.");
+      }
+      if (res?.error === "Username is not available.") {
+        toast.error("Username is not available.");
+        setLoading(false);
       }
     } else {
       toast.error("Passwords do not match.");
@@ -132,7 +141,14 @@ export default function SignUpForm() {
           )}
         />
 
-        <Button type="submit">Create an account</Button>
+        {!loading ? (
+          <Button type="submit">Create an account</Button>
+        ) : (
+          <Button disabled>
+            <RotateCw className="mr-2 h-4 w-4 animate-spin" />
+            Creating
+          </Button>
+        )}
       </form>
     </Form>
   );
