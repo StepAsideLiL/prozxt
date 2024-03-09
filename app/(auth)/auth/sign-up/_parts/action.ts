@@ -16,7 +16,6 @@ export async function createUser(data: FormData) {
 
   if (
     typeof username !== "string" ||
-    username === "info" ||
     username.length < 1 ||
     username.length > 31 ||
     !/^[a-z0-9_-]+$/.test(username)
@@ -38,19 +37,31 @@ export async function createUser(data: FormData) {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const user = await prisma.user.create({
-    data: {
+  const isExistuser = await prisma.user.findUnique({
+    where: {
       username: username,
-      hashed_password: hashedPassword,
     },
   });
 
-  const session = await lucia.createSession(user.id, {});
-  const sessionCookie = lucia.createSessionCookie(session.id);
-  cookies().set(
-    sessionCookie.name,
-    sessionCookie.value,
-    sessionCookie.attributes
-  );
-  return redirect("/");
+  if (!isExistuser) {
+    const user = await prisma.user.create({
+      data: {
+        username: username,
+        hashed_password: hashedPassword,
+      },
+    });
+
+    const session = await lucia.createSession(user.id, {});
+    const sessionCookie = lucia.createSessionCookie(session.id);
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes
+    );
+    return redirect("/");
+  } else {
+    return {
+      error: "Username is not available.",
+    };
+  }
 }
