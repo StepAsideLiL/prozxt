@@ -7,6 +7,11 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import SignInForm from "./_parts/signin-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign in",
+};
 
 export default function Page() {
   return (

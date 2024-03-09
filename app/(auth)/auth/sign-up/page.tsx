@@ -7,6 +7,11 @@ import {
 } from "@/components/ui/card";
 import SignUpForm from "./_parts/sign-up-form";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create an accout",
+};
 
 export default function Page() {
   return (
