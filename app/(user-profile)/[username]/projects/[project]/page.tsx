@@ -1,3 +1,11 @@
-export default function Page({ params }: { params: { project: string } }) {
-  return <main>{params.project}</main>;
+export default function Page({
+  params,
+}: {
+  params: { username: string; project: string };
+}) {
+  return (
+    <main>
+      {params.username} {params.project}
+    </main>
+  );
 }

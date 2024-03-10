@@ -1,3 +1,11 @@
-export default function Page({ params }: { params: { post: string } }) {
-  return <main>{params.post}</main>;
+export default function Page({
+  params,
+}: {
+  params: { username: string; post: string };
+}) {
+  return (
+    <main>
+      {params.username} {params.post}
+    </main>
+  );
 }

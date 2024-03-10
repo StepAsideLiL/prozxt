@@ -1,3 +1,3 @@
-export default function Page() {
-  return <main>Card</main>;
+export default function Page({ params }: { params: { username: string } }) {
+  return <main>{params.username} Card</main>;
 }
