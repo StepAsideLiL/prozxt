@@ -18,6 +18,7 @@
 (user-card & layout)
 |-[username]
   |-card -> page
+    |-edit -> page
 
 (add-edit & layout)
 |-add
