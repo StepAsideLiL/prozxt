@@ -1,9 +1,12 @@
+import { Suspense } from "react";
 import CardContent from "./_parts/card-content";
 
-export default function Page({ params }: { params: { username: string } }) {
+export default function Page() {
   return (
     <main className="min-h-screen grid place-content-center">
-      <CardContent username={params.username} />
+      <Suspense fallback={"loading"}>
+        <CardContent />
+      </Suspense>
     </main>
   );
 }
