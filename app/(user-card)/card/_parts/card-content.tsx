@@ -1,7 +1,12 @@
 import { getUserCard } from "@/lib/data/user";
+import { redirect } from "next/navigation";
 
-export default async function CardContent({ username }: { username: string }) {
-  const user = await getUserCard(username);
+export default async function CardContent() {
+  const user = await getUserCard();
 
-  return <div>{username} Card Content</div>;
+  if (!user) {
+    redirect("/auth/sign-in");
+  }
+
+  return <div>{user?.username} Card Content</div>;
 }
