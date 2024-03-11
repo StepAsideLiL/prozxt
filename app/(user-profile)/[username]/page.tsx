@@ -1,4 +1,4 @@
-import Logout from "@/components/uis/logout";
+import Logout from "@/components/prozxt-ui/logout";
 import { validateRequest } from "@/lib/auth";
 import { getUser } from "@/lib/data/user";
 
