@@ -16,9 +16,8 @@
     |-[project] -> page
 
 (user-card & layout)
-|-[username]
-  |-card -> page
-    |-edit -> page
+|-card -> page
+  |-[username] -> page
 
 (add-edit & layout)
 |-add
