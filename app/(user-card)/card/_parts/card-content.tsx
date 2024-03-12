@@ -1,10 +1,11 @@
 import { FullLogo } from "@/components/prozxt-ui/logo";
+import { Button } from "@/components/ui/button";
 import { getCurrentUserCard } from "@/lib/data/user";
 import { monofett, vt323 } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { SiGithub, SiInstagram, SiX } from "react-icons/si";
-import CardContentForm from "./card-content-form";
 
 export default async function CardContent() {
   const user = await getCurrentUserCard();
@@ -14,10 +15,8 @@ export default async function CardContent() {
   }
 
   return (
-    <div className="flex w-full justify-between">
-      <CardContentForm />
-
-      <div className="aspect-[96/45] w-[700px] max-w-3xl select-none rounded-2xl border p-10">
+    <div>
+      <section className="aspect-[96/45] w-[700px] select-none rounded-2xl border p-10">
         <div className="flex h-full w-full flex-col">
           <div className="flex flex-1 items-start gap-5">
             <div>
@@ -33,7 +32,7 @@ export default async function CardContent() {
 
             <div className="flex flex-col items-end gap-2">
               <FullLogo size={100} />
-              <p className="text-right text-sm text-muted-foreground">
+              <p className="text-right text-[10px] text-muted-foreground">
                 Portfolio and Project
               </p>
             </div>
@@ -65,7 +64,13 @@ export default async function CardContent() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section>
+        <Button asChild>
+          <Link href={"#edit-card"}>Edit Your Card</Link>
+        </Button>
+      </section>
     </div>
   );
 }
