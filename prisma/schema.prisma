@@ -19,6 +19,7 @@ model User {
   hashed_password String
 
   sessions Session[]
+  card     Card?
 }
 
 model Session {
@@ -26,4 +27,17 @@ model Session {
   userId    String
   expiresAt DateTime
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model Card {
+  id String @id @unique @default(cuid())
+
+  name    String @default("")
+  title   String @default("")
+  icons   String @default("")
+  socials String @default("")
+  style   String @default("")
+
+  userId String @unique
+  user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
