@@ -15,7 +15,7 @@ export default async function CardContent() {
   }
 
   return (
-    <div>
+    <div className="space-y-3">
       <section className="aspect-[96/45] w-[700px] select-none rounded-2xl border p-10">
         <div className="flex h-full w-full flex-col">
           <div className="flex flex-1 items-start gap-5">
@@ -67,7 +67,7 @@ export default async function CardContent() {
       </section>
 
       <section>
-        <Button asChild>
+        <Button variant={"outline"} asChild>
           <Link href={"#edit-card"}>Edit Your Card</Link>
         </Button>
       </section>
