@@ -1,10 +1,18 @@
 import {
+  SiCss3,
   SiFacebook,
   SiGithub,
+  SiHtml5,
   SiInstagram,
+  SiJavascript,
   SiLinkedin,
+  SiNextdotjs,
+  SiReact,
+  SiTailwindcss,
   SiThreads,
   SiTiktok,
+  SiTypescript,
+  SiWordpress,
   SiX,
 } from "react-icons/si";
 
@@ -43,5 +51,48 @@ export const socialIcons = [
     id: "tiktok",
     socialTitle: "Tiktok",
     icon: <SiTiktok />,
+  },
+];
+
+export const cardIcons = [
+  {
+    id: "react",
+    title: "React",
+    icon: <SiReact />,
+  },
+  {
+    id: "nextjs",
+    title: "Nextjs",
+    icon: <SiNextdotjs />,
+  },
+  {
+    id: "tailwindcss",
+    title: "Tailwind CSS",
+    icon: <SiTailwindcss />,
+  },
+  {
+    id: "html",
+    title: "HTML",
+    icon: <SiHtml5 />,
+  },
+  {
+    id: "css",
+    title: "CSS",
+    icon: <SiCss3 />,
+  },
+  {
+    id: "javascript",
+    title: "JavaScript",
+    icon: <SiJavascript />,
+  },
+  {
+    id: "typescript",
+    title: "TypeScript",
+    icon: <SiTypescript />,
+  },
+  {
+    id: "wordpress",
+    title: "WordPress",
+    icon: <SiWordpress />,
   },
 ];
