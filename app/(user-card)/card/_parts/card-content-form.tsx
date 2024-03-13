@@ -13,24 +13,14 @@ import { Plus, RotateCw, X } from "lucide-react";
 import { ChangeEvent, useState } from "react";
 import { addCardData } from "./actions";
 import { toast } from "sonner";
-
-type Socials = {
-  id: string;
-  socialTitle: string;
-  username: string;
-}[];
-
-type Icons = {
-  id: string;
-  title: string;
-}[];
+import { CardIcons, CardSocials } from "@/lib/types";
 
 export default function CardContentForm() {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
-  const [socials, setSocials] = useState<Socials>([]);
-  const [icons, setIcons] = useState<Icons>([]);
+  const [socials, setSocials] = useState<CardSocials>([]);
+  const [icons, setIcons] = useState<CardIcons>([]);
 
   async function handleSubmit() {
     const formData = {
