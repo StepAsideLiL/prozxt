@@ -7,6 +7,7 @@ import { cache } from "react";
 import type { Session, User } from "lucia";
 
 interface DatabaseUserAttributes {
+  id: string;
   username: string;
 }
 
@@ -29,6 +30,7 @@ export const lucia = new Lucia(adapter, {
   getUserAttributes: (attributes) => {
     return {
       // attributes has the type of DatabaseUserAttributes
+      id: attributes.id,
       username: attributes.username,
     };
   },
@@ -54,7 +56,7 @@ export const validateRequest = cache(
         cookies().set(
           sessionCookie.name,
           sessionCookie.value,
-          sessionCookie.attributes
+          sessionCookie.attributes,
         );
       }
       if (!result.session) {
@@ -62,10 +64,10 @@ export const validateRequest = cache(
         cookies().set(
           sessionCookie.name,
           sessionCookie.value,
-          sessionCookie.attributes
+          sessionCookie.attributes,
         );
       }
     } catch {}
     return result;
-  }
+  },
 );
