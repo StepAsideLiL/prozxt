@@ -1,6 +1,6 @@
 import { FullLogo } from "@/components/prozxt-ui/logo";
 import { Button } from "@/components/ui/button";
-import { getCurrentUserCard } from "@/lib/data/user";
+import { getCurrentUserCard } from "@/lib/data/card";
 import { monofett, vt323 } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
