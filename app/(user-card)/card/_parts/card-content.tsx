@@ -1,13 +1,9 @@
-import { FullLogo } from "@/components/prozxt-ui/logo";
 import { Button } from "@/components/ui/button";
 import { getCurrentUserCard } from "@/lib/data/card";
-import { monofett, vt323 } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import CardContentForm from "./card-content-form";
 import { CardIcons, CardSocials } from "@/lib/types";
-import { cardIcons, socialIcons } from "@/components/prozxt-ui/lists";
 import UserCard from "./user-card";
 
 export default async function CardContent() {
