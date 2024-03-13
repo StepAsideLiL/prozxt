@@ -7,9 +7,12 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { SiGithub, SiInstagram, SiX } from "react-icons/si";
 import CardContentForm from "./card-content-form";
+import { CardSocials } from "@/lib/types";
+import { socialIcons } from "@/components/prozxt-ui/lists";
 
 export default async function CardContent() {
   const user = await getCurrentUserCard();
+  const socials: CardSocials = JSON.parse(user?.card?.socials || "[]");
 
   if (!user) {
     redirect("/auth/sign-in");
@@ -26,9 +29,11 @@ export default async function CardContent() {
               </div>
 
               <div className="flex-1">
-                <h1 className="text-4xl font-semibold">Rifat Khan</h1>
+                <h1 className="text-4xl font-semibold">
+                  {user.card?.name || "(no name)"}
+                </h1>
                 <p className="text-sm text-muted-foreground">
-                  Full-stack Developer
+                  {user.card?.title || "(no title)"}
                 </p>
               </div>
 
@@ -51,18 +56,12 @@ export default async function CardContent() {
               </div>
 
               <div>
-                <p className="flex items-center gap-2">
-                  <SiX />
-                  <span>hello</span>
-                </p>
-                <p className="flex items-center gap-2">
-                  <SiGithub />
-                  <span>helloascas</span>
-                </p>
-                <p className="flex items-center gap-2">
-                  <SiInstagram />
-                  <span>helloascasc</span>
-                </p>
+                {socials.map((social) => (
+                  <p key={social.id} className="flex items-center gap-2">
+                    {socialIcons.find((s) => s.id === social.id)?.icon}
+                    {social.username}
+                  </p>
+                ))}
               </div>
             </div>
           </div>
