@@ -57,10 +57,15 @@ export default async function CardContent() {
 
               <div>
                 {socials.map((social) => (
-                  <p key={social.id} className="flex items-center gap-2">
+                  <Link
+                    href={`${socialIcons.find((s) => s.id === social.id)?.profileHref}${social.username}`}
+                    key={social.id}
+                    target="_blank"
+                    className="flex items-center gap-2"
+                  >
                     {socialIcons.find((s) => s.id === social.id)?.icon}
                     {social.username}
-                  </p>
+                  </Link>
                 ))}
               </div>
             </div>

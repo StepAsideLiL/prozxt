@@ -8,6 +8,7 @@ import {
   SiLinkedin,
   SiNextdotjs,
   SiReact,
+  SiReddit,
   SiTailwindcss,
   SiThreads,
   SiTiktok,
@@ -21,36 +22,49 @@ export const socialIcons = [
     id: "x",
     socialTitle: "X",
     icon: <SiX />,
+    profileHref: "https://twitter.com/",
   },
   {
     id: "github",
     socialTitle: "GitHub",
     icon: <SiGithub />,
+    profileHref: "https://github.com/",
   },
   {
     id: "instagram",
     socialTitle: "Instagram",
     icon: <SiInstagram />,
+    profileHref: "https://www.instagram.com/",
   },
   {
     id: "linkedin",
     socialTitle: "Linkedin",
     icon: <SiLinkedin />,
+    profileHref: "https://www.linkedin.com/in/",
   },
   {
     id: "facebook",
     socialTitle: "Facebook",
     icon: <SiFacebook />,
+    profileHref: "https://www.facebook.com/",
   },
   {
     id: "threads",
     socialTitle: "Threads",
     icon: <SiThreads />,
+    profileHref: "https://www.threads.net/@",
   },
   {
     id: "tiktok",
     socialTitle: "Tiktok",
     icon: <SiTiktok />,
+    profileHref: "https://www.tiktok.com/@",
+  },
+  {
+    id: "reddit",
+    socialTitle: "Reddit",
+    icon: <SiReddit />,
+    profileHref: "https://www.reddit.com/user/",
   },
 ];
 
