@@ -15,12 +15,22 @@ import { addCardData } from "./actions";
 import { toast } from "sonner";
 import { CardIcons, CardSocials } from "@/lib/types";
 
-export default function CardContentForm() {
+export default function CardContentForm({
+  initialName,
+  initialTitle,
+  initialSocials,
+  initialIcons,
+}: {
+  initialName: string;
+  initialTitle: string;
+  initialSocials: CardSocials;
+  initialIcons: CardIcons;
+}) {
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState("");
-  const [title, setTitle] = useState("");
-  const [socials, setSocials] = useState<CardSocials>([]);
-  const [icons, setIcons] = useState<CardIcons>([]);
+  const [name, setName] = useState(initialName);
+  const [title, setTitle] = useState(initialTitle);
+  const [socials, setSocials] = useState<CardSocials>(initialSocials);
+  const [icons, setIcons] = useState<CardIcons>(initialIcons);
 
   async function handleSubmit() {
     const formData = {
@@ -48,6 +58,7 @@ export default function CardContentForm() {
       <Input
         type="text"
         autoComplete="off"
+        value={name}
         placeholder="Name. Ex: John Doe"
         onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
       />
@@ -55,6 +66,7 @@ export default function CardContentForm() {
       <Input
         type="text"
         autoComplete="off"
+        value={title}
         placeholder="Title. Ex: Software Developer"
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           setTitle(e.target.value)
@@ -107,6 +119,7 @@ export default function CardContentForm() {
               return (
                 <div key={i} className="flex items-center gap-2">
                   <Input
+                    value={social.username}
                     placeholder={`Add ${social.socialTitle} username`}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
                       const allSocials = socials.filter(
@@ -178,16 +191,16 @@ export default function CardContentForm() {
           </DropdownMenu>
         </section>
 
-        <section className="flex-1 space-y-2">
+        <section className="flex flex-1 items-center gap-2">
           {icons.length === 0 && (
             <span className="text-muted-foreground">Add 5 Important Icons</span>
           )}
           {icons.map((icon, i) => {
             if (i <= 4) {
               return (
-                <div key={i} className="flex items-center gap-2">
+                <div key={i} className="relative w-fit p-3">
                   <div>
-                    {cardIcons.find((list) => list.id == icon.id)?.icon}
+                    {cardIcons.find((list) => list.id == icon.id)?.iconBig}
                   </div>
 
                   <Button
@@ -198,8 +211,9 @@ export default function CardContentForm() {
                         icons.filter((s) => s.id !== icon.id),
                       );
                     }}
+                    className="absolute right-0 top-0 h-4 w-4 rounded-full"
                   >
-                    <X />
+                    <X size={10} />
                   </Button>
                 </div>
               );

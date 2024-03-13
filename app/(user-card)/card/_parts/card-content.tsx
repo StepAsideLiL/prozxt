@@ -5,14 +5,14 @@ import { monofett, vt323 } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { SiGithub, SiInstagram, SiX } from "react-icons/si";
 import CardContentForm from "./card-content-form";
-import { CardSocials } from "@/lib/types";
-import { socialIcons } from "@/components/prozxt-ui/lists";
+import { CardIcons, CardSocials } from "@/lib/types";
+import { cardIcons, socialIcons } from "@/components/prozxt-ui/lists";
 
 export default async function CardContent() {
   const user = await getCurrentUserCard();
   const socials: CardSocials = JSON.parse(user?.card?.socials || "[]");
+  const icons: CardIcons = JSON.parse(user?.card?.icons || "[]");
 
   if (!user) {
     redirect("/auth/sign-in");
@@ -46,13 +46,22 @@ export default async function CardContent() {
             </div>
 
             <div className="flex items-end justify-between gap-5">
-              <div
-                className={cn(
-                  "text-9xl uppercase text-muted-foreground",
-                  vt323.className,
-                )}
-              >
-                {user.username}
+              <div>
+                <h1
+                  className={cn(
+                    "text-6xl uppercase text-muted-foreground",
+                    vt323.className,
+                  )}
+                >
+                  {user.username}
+                </h1>
+                <div className="flex gap-2">
+                  {icons.map((icon) => (
+                    <span key={icon.id}>
+                      {cardIcons.find((i) => i.id === icon.id)?.iconMd}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               <div>
@@ -80,7 +89,12 @@ export default async function CardContent() {
       </div>
 
       <section id="edit-card" className="flex justify-center py-10">
-        <CardContentForm />
+        <CardContentForm
+          initialName={user.card!.name}
+          initialTitle={user.card!.title}
+          initialSocials={socials}
+          initialIcons={icons}
+        />
       </section>
     </>
   );
