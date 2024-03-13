@@ -9,8 +9,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Plus, X } from "lucide-react";
+import { Plus, RotateCw, X } from "lucide-react";
 import { ChangeEvent, useState } from "react";
+import { addCardData } from "./actions";
+import { toast } from "sonner";
 
 type Socials = {
   id: string;
@@ -24,19 +26,31 @@ type Icons = {
 }[];
 
 export default function CardContentForm() {
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [socials, setSocials] = useState<Socials>([]);
   const [icons, setIcons] = useState<Icons>([]);
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const formData = {
       name: name,
       title: title,
       socials: JSON.stringify(socials),
       icons: JSON.stringify(icons),
     };
-    console.log(formData);
+    setLoading(true);
+
+    const res = await addCardData(formData);
+
+    if (res.status === "success") {
+      setLoading(false);
+      toast.success(res.message);
+    }
+    if (res.status === "error") {
+      setLoading(false);
+      toast.error(res.message);
+    }
   }
 
   return (
@@ -208,7 +222,14 @@ export default function CardContentForm() {
       {/* Add Icons Section End */}
 
       <section>
-        <Button onClick={() => handleSubmit()}>Save</Button>
+        {!loading ? (
+          <Button onClick={() => handleSubmit()}>Save</Button>
+        ) : (
+          <Button disabled>
+            <RotateCw className="mr-2 h-4 w-4 animate-spin" />
+            Saving
+          </Button>
+        )}
       </section>
     </section>
   );
