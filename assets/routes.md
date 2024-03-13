@@ -14,6 +14,7 @@
     |-[post] -> page
   |-projects -> page
     |-[project] -> page
+  |-edit -> page
 
 (user-card & layout)
 |-card -> page
