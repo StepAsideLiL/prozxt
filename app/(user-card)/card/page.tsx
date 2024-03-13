@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import CardContent from "./_parts/card-content";
-import CardContentForm from "./_parts/card-content-form";
 
 export default function Page() {
   return (
