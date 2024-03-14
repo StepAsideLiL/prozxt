@@ -37,7 +37,7 @@ export default function ImgbbUploadForm({
       setLoading(true);
 
       fetch(
-        "https://api.imgbb.com/1/upload?key=b8ffb6d8e6d38807cfd2f78225172a4a",
+        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
         {
           method: "POST",
           body: data,
@@ -45,7 +45,6 @@ export default function ImgbbUploadForm({
       )
         .then((res) => res.json())
         .then(async (res: ImgbbImageRes) => {
-          console.log(res);
           if (res.success) {
             const formData = {
               imgbbId: res.data.id,
