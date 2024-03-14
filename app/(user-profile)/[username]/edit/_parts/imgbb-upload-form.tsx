@@ -10,10 +10,14 @@ import { ImgbbImageRes, ProfilePicturePreview } from "@/lib/types";
 import { RotateCw } from "lucide-react";
 import { toast } from "sonner";
 
-export default function ImgbbUploadForm() {
+export default function ImgbbUploadForm({
+  profilePicture,
+}: {
+  profilePicture: ProfilePicturePreview;
+}) {
   const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] =
-    useState<ProfilePicturePreview | null>(null);
+    useState<ProfilePicturePreview | null>(profilePicture);
 
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
