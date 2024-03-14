@@ -20,6 +20,7 @@ export default async function CardContent() {
       <div className="flex min-h-screen w-full flex-col items-center justify-center gap-3">
         <UserCard
           username={user.username}
+          profilePicture={user.profilePicture!.url}
           name={user.card!.name}
           title={user.card!.title}
           socials={socials}

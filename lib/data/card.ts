@@ -14,6 +14,7 @@ export async function getCurrentUserCard() {
           id: true,
           username: true,
           card: true,
+          profilePicture: true,
         },
       });
 

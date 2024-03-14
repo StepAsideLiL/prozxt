@@ -4,15 +4,18 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { monofett, vt323 } from "@/lib/fonts";
 import { cardIcons, socialIcons } from "@/components/prozxt-ui/lists";
+import Image from "next/image";
 
 export default function UserCard({
   username,
+  profilePicture,
   name,
   title,
   socials,
   icons,
 }: {
   username: string;
+  profilePicture: string;
   name: string;
   title: string;
   socials: CardSocials;
@@ -23,7 +26,15 @@ export default function UserCard({
       <div className="flex h-full w-full flex-col">
         <div className="flex flex-1 items-start gap-5">
           <div>
-            <div className="aspect-square w-12 rounded-full border"></div>
+            <div className="aspect-square w-12 rounded-full border">
+              <Image
+                src={profilePicture}
+                alt={`Profile Picture of ${username}`}
+                width={50}
+                height={50}
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
 
           <div className="flex-1">
