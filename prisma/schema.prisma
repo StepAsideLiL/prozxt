@@ -18,9 +18,9 @@ model User {
   username        String @unique
   hashed_password String
 
-  sessions Session[]
-  card     Card?
-  prfile   Image?
+  sessions       Session[]
+  card           Card?
+  profilePicture Image?
 }
 
 model Session {
