@@ -11,7 +11,7 @@ export type CardIcons = {
 
 export type ProfilePicturePreview = {
   name: string;
-  type: string;
+  mime: string;
   url: string;
 };
 
@@ -53,9 +53,9 @@ export type ImgbbFormData = {
   url: string;
   imgbbUrl: string;
   deleteUrl: string;
+  mime: string;
   width: number;
   height: number;
-  mime: string;
   size: number;
   time: number;
 };
