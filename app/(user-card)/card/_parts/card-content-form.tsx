@@ -191,7 +191,7 @@ export default function CardContentForm({
           </DropdownMenu>
         </section>
 
-        <section className="flex flex-1 items-center gap-2">
+        <section className="flex flex-1 flex-wrap items-center gap-2">
           {icons.length === 0 && (
             <span className="text-muted-foreground">Add 5 Important Icons</span>
           )}
@@ -200,7 +200,7 @@ export default function CardContentForm({
               return (
                 <div key={i} className="relative w-fit p-3">
                   <div>
-                    {cardIcons.find((list) => list.id == icon.id)?.iconBig}
+                    {cardIcons.find((list) => list.id == icon.id)?.iconMd}
                   </div>
 
                   <Button
