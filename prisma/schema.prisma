@@ -20,6 +20,7 @@ model User {
 
   sessions Session[]
   card     Card?
+  prfile   Image?
 }
 
 model Session {
@@ -27,6 +28,24 @@ model Session {
   userId    String
   expiresAt DateTime
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model Image {
+  id String @id @unique @default(cuid())
+
+  imgbbId   String
+  title     String
+  url       String
+  imgbbUrl  String
+  deleteUrl String
+  mime      String
+  width     BigInt
+  height    BigInt
+  size      BigInt
+  time      BigInt
+
+  userId String @unique
+  user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
 model Card {
