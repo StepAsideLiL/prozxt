@@ -26,7 +26,7 @@ export default function UserCard({
       <div className="flex h-full w-full flex-col">
         <div className="flex flex-1 items-start gap-5">
           <div>
-            <div className="aspect-square w-12 rounded-full border">
+            <div className="aspect-square w-12 overflow-hidden rounded-full border">
               <Image
                 src={profilePicture}
                 alt={`Profile Picture of ${username}`}
