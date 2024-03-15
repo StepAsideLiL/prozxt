@@ -10,9 +10,9 @@ export default async function Page() {
   }
 
   const profilePicture = {
-    name: user.profilePicture!.title,
-    mime: user.profilePicture!.mime,
-    url: user.profilePicture!.url,
+    name: user.profilePicture?.title || "",
+    mime: user.profilePicture?.mime || "",
+    url: user.profilePicture?.url || "",
   };
 
   return (
