@@ -89,7 +89,18 @@ export default function UserCard({
         </div>
       </section> */}
 
-      <section className="aspect-[9/12] w-96 select-none rounded-2xl border p-10">
+      <section className="relative block aspect-[9/12] w-96 select-none overflow-hidden rounded-2xl border p-10 md:hidden">
+        <div className="absolute -bottom-8 left-1/2 -z-20 -translate-x-1/2 blur-[1px]">
+          <h1
+            className={cn(
+              "text-9xl uppercase text-muted-foreground",
+              vt323.className,
+            )}
+          >
+            {username}
+          </h1>
+        </div>
+
         <Link
           href={`/${username}`}
           className="flex h-full flex-col justify-between"
