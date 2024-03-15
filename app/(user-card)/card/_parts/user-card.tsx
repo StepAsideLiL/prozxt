@@ -2,7 +2,7 @@ import { FullLogo } from "@/components/prozxt-ui/logo";
 import { CardIcons, CardSocials } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { monofett, vt323 } from "@/lib/fonts";
+import { vt323 } from "@/lib/fonts";
 import { cardIcons, socialIcons } from "@/components/prozxt-ui/lists";
 import Image from "next/image";
 
