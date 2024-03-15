@@ -4,7 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import CardContentForm from "./card-content-form";
 import { CardIcons, CardSocials } from "@/lib/types";
-import UserCard from "./user-card";
+import UserCard from "@/components/prozxt-ui/user-card";
 
 export default async function CardContent() {
   const user = await getCurrentUserCard();
