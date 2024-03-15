@@ -23,8 +23,19 @@ export default function UserCard({
 }) {
   return (
     <>
-      {/* <section className="hidden aspect-video w-[700px] select-none rounded-2xl border p-10 md:block">
-        <div className="flex h-full w-full flex-col">
+      <section className="relative hidden aspect-video w-[700px] select-none overflow-hidden rounded-2xl border p-10 md:block">
+        <div className="absolute -bottom-4 left-1/2 -z-20 -translate-x-1/2 blur-[1px]">
+          <h1
+            className={cn(
+              "text-6xl uppercase text-muted-foreground",
+              vt323.className,
+            )}
+          >
+            {username}
+          </h1>
+        </div>
+
+        <Link href={`/${username}`} className="flex h-full w-full flex-col">
           <div className="flex flex-1 items-start gap-5">
             <div>
               <div className="aspect-square w-12 overflow-hidden rounded-full border">
@@ -47,29 +58,16 @@ export default function UserCard({
 
             <div className="flex flex-col items-end gap-2">
               <FullLogo size={100} />
-              <p className="text-right text-[10px] text-muted-foreground">
-                Portfolio and Project
-              </p>
             </div>
           </div>
 
           <div className="flex items-end justify-between gap-5">
-            <div>
-              <h1
-                className={cn(
-                  "text-6xl uppercase text-muted-foreground",
-                  vt323.className,
-                )}
-              >
-                {username}
-              </h1>
-              <div className="flex gap-2">
-                {icons.map((icon) => (
-                  <span key={icon.id}>
-                    {cardIcons.find((i) => i.id === icon.id)?.iconMd}
-                  </span>
-                ))}
-              </div>
+            <div className="flex gap-2">
+              {icons.map((icon) => (
+                <span key={icon.id}>
+                  {cardIcons.find((i) => i.id === icon.id)?.iconBig}
+                </span>
+              ))}
             </div>
 
             <div>
@@ -86,8 +84,8 @@ export default function UserCard({
               ))}
             </div>
           </div>
-        </div>
-      </section> */}
+        </Link>
+      </section>
 
       <section className="relative block aspect-[9/12] w-96 select-none overflow-hidden rounded-2xl border p-10 md:hidden">
         <div className="absolute -bottom-8 left-1/2 -z-20 -translate-x-1/2 blur-[1px]">
