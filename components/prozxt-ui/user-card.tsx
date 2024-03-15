@@ -23,7 +23,7 @@ export default function UserCard({
 }) {
   return (
     <>
-      <section className="hidden aspect-video w-[700px] select-none overflow-hidden rounded-2xl border p-10 md:block">
+      <section className="relative hidden aspect-video w-[700px] select-none overflow-hidden rounded-2xl border p-10 md:block">
         <div className="absolute -bottom-4 left-1/2 -z-20 -translate-x-1/2 blur-[1px]">
           <h1
             className={cn(
