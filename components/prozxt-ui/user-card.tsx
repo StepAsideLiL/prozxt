@@ -23,6 +23,7 @@ export default function UserCard({
 }) {
   return (
     <>
+      {/* Desktop View */}
       <section className="relative hidden aspect-video w-[700px] select-none overflow-hidden rounded-2xl border p-10 md:block">
         <div className="absolute -bottom-4 left-1/2 -z-20 -translate-x-1/2 blur-[1px]">
           <h1
@@ -35,10 +36,13 @@ export default function UserCard({
           </h1>
         </div>
 
-        <Link href={`/${username}`} className="flex h-full w-full flex-col">
+        <div className="flex h-full w-full flex-col">
           <div className="flex flex-1 items-start gap-5">
             <div>
-              <div className="aspect-square w-12 overflow-hidden rounded-full border">
+              <Link
+                href={`/${username}`}
+                className="inline-block aspect-square w-12 overflow-hidden rounded-full border"
+              >
                 <Image
                   src={profilePicture || ""}
                   alt={`Profile Picture of ${username}`}
@@ -46,11 +50,15 @@ export default function UserCard({
                   height={50}
                   className="h-full w-full object-cover"
                 />
-              </div>
+              </Link>
             </div>
 
             <div className="flex-1">
-              <h1 className="text-4xl font-semibold">{name || "(no name)"}</h1>
+              <h1 className="text-4xl font-semibold">
+                <Link href={`/${username}`} className="hover:underline">
+                  {name || "(no name)"}
+                </Link>
+              </h1>
               <p className="text-sm text-muted-foreground">
                 {title || "(no title)"}
               </p>
@@ -72,16 +80,22 @@ export default function UserCard({
 
             <div>
               {socials.map((social) => (
-                <div key={social.id} className="flex items-center gap-2">
+                <Link
+                  href={social.profileUrl || `/${username}`}
+                  key={social.id}
+                  className="flex items-center gap-2"
+                >
                   {socialIcons.find((s) => s.id === social.id)?.icon}
                   {social.username}
-                </div>
+                </Link>
               ))}
             </div>
           </div>
-        </Link>
+        </div>
       </section>
+      {/* Desktop View End */}
 
+      {/* Mobile View */}
       <section className="relative block aspect-[9/12] w-96 select-none overflow-hidden rounded-2xl border p-10 md:hidden">
         <div className="absolute -bottom-8 left-1/2 -z-20 -translate-x-1/2 blur-[1px]">
           <h1
@@ -94,12 +108,12 @@ export default function UserCard({
           </h1>
         </div>
 
-        <Link
-          href={`/${username}`}
-          className="flex h-full flex-col justify-between"
-        >
+        <div className="flex h-full flex-col justify-between">
           <div className="flex items-center justify-between">
-            <div className="aspect-square w-12 overflow-hidden rounded-full border">
+            <Link
+              href={`/${username}`}
+              className="inline-block aspect-square w-12 overflow-hidden rounded-full border"
+            >
               <Image
                 src={profilePicture || ""}
                 alt={`Profile Picture of ${username}`}
@@ -107,7 +121,7 @@ export default function UserCard({
                 height={50}
                 className="h-full w-full object-cover"
               />
-            </div>
+            </Link>
 
             <div>
               <FullLogo size={100} />
@@ -115,7 +129,11 @@ export default function UserCard({
           </div>
 
           <div className="text-center">
-            <h1 className="text-4xl font-semibold">{name || "(no name)"}</h1>
+            <h1 className="text-4xl font-semibold">
+              <Link href={`/${username}`} className="hover:underline">
+                {name || "(no name)"}
+              </Link>
+            </h1>
             <p className="text-sm text-muted-foreground">
               {title || "(no title)"}
             </p>
@@ -124,10 +142,14 @@ export default function UserCard({
           <div className="flex justify-center">
             <div className="flex flex-col">
               {socials.map((social) => (
-                <div key={social.id} className="flex items-center gap-2">
+                <Link
+                  href={social.profileUrl || `/${username}`}
+                  key={social.id}
+                  className="flex items-center gap-2"
+                >
                   {socialIcons.find((s) => s.id === social.id)?.icon}
                   {social.username}
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -139,8 +161,9 @@ export default function UserCard({
               </span>
             ))}
           </div>
-        </Link>
+        </div>
       </section>
+      {/* Mobile View End */}
     </>
   );
 }
