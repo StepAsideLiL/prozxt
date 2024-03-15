@@ -2,6 +2,7 @@ export type CardSocials = {
   id: string;
   socialTitle: string;
   username: string;
+  profileUrl: string;
 }[];
 
 export type CardIcons = {

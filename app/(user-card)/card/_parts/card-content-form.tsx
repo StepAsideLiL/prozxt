@@ -54,24 +54,28 @@ export default function CardContentForm({
   }
 
   return (
-    <section className="w-96 space-y-3">
-      <Input
-        type="text"
-        autoComplete="off"
-        value={name}
-        placeholder="Name. Ex: John Doe"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-      />
+    <section className="w-96 space-y-3 md:w-[520px]">
+      <section className="flex flex-col gap-2 md:flex-row">
+        <Input
+          type="text"
+          autoComplete="off"
+          value={name}
+          placeholder="Name. Ex: John Doe"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setName(e.target.value)
+          }
+        />
 
-      <Input
-        type="text"
-        autoComplete="off"
-        value={title}
-        placeholder="Title. Ex: Software Developer"
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setTitle(e.target.value)
-        }
-      />
+        <Input
+          type="text"
+          autoComplete="off"
+          value={title}
+          placeholder="Title. Ex: Software Developer"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setTitle(e.target.value)
+          }
+        />
+      </section>
 
       {/* Add Profile Links Section */}
       <section className="flex w-full gap-3">
@@ -96,6 +100,7 @@ export default function CardContentForm({
                           id: list.id,
                           socialTitle: list.socialTitle,
                           username: "",
+                          profileUrl: "",
                         },
                       ]);
                     }
@@ -108,7 +113,7 @@ export default function CardContentForm({
           </DropdownMenu>
         </section>
 
-        <section className="flex-1 space-y-2">
+        <section className="flex-1 divide-y">
           {socials.length === 0 && (
             <span className="text-muted-foreground">
               Add Your Profile Links (4 links)
@@ -117,24 +122,47 @@ export default function CardContentForm({
           {socials.map((social, i) => {
             if (i <= 3) {
               return (
-                <div key={i} className="flex items-center gap-2">
-                  <Input
-                    value={social.username}
-                    placeholder={`Add ${social.socialTitle} username`}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                      const allSocials = socials.filter(
-                        (s) => s.id !== social.id,
-                      );
-                      setSocials([
-                        ...allSocials,
-                        {
-                          id: social.id,
-                          socialTitle: social.socialTitle,
-                          username: e.target.value,
-                        },
-                      ]);
-                    }}
-                  />
+                <div key={i} className="flex items-start gap-2 py-2">
+                  <div className="flex w-full flex-col gap-2 md:flex-row">
+                    <Input
+                      value={social.profileUrl}
+                      placeholder={`Add ${social.socialTitle} profile url`}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        const allSocials = socials.filter(
+                          (s) => s.id !== social.id,
+                        );
+
+                        setSocials([
+                          ...allSocials,
+                          {
+                            id: social.id,
+                            socialTitle: social.socialTitle,
+                            username: social.username,
+                            profileUrl: e.target.value,
+                          },
+                        ]);
+                      }}
+                    />
+
+                    <Input
+                      value={social.username}
+                      placeholder={`Add ${social.socialTitle} username`}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        const allSocials = socials.filter(
+                          (s) => s.id !== social.id,
+                        );
+                        setSocials([
+                          ...allSocials,
+                          {
+                            id: social.id,
+                            socialTitle: social.socialTitle,
+                            username: e.target.value,
+                            profileUrl: social.profileUrl,
+                          },
+                        ]);
+                      }}
+                    />
+                  </div>
 
                   <Button
                     variant={"outline"}
