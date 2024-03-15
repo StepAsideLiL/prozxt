@@ -22,10 +22,79 @@ export default function UserCard({
   icons: CardIcons;
 }) {
   return (
-    <section className="aspect-[96/45] w-[700px] select-none rounded-2xl border p-10">
-      <div className="flex h-full w-full flex-col">
-        <div className="flex flex-1 items-start gap-5">
-          <div>
+    <>
+      {/* <section className="hidden aspect-video w-[700px] select-none rounded-2xl border p-10 md:block">
+        <div className="flex h-full w-full flex-col">
+          <div className="flex flex-1 items-start gap-5">
+            <div>
+              <div className="aspect-square w-12 overflow-hidden rounded-full border">
+                <Image
+                  src={profilePicture}
+                  alt={`Profile Picture of ${username}`}
+                  width={50}
+                  height={50}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="flex-1">
+              <h1 className="text-4xl font-semibold">{name || "(no name)"}</h1>
+              <p className="text-sm text-muted-foreground">
+                {title || "(no title)"}
+              </p>
+            </div>
+
+            <div className="flex flex-col items-end gap-2">
+              <FullLogo size={100} />
+              <p className="text-right text-[10px] text-muted-foreground">
+                Portfolio and Project
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-end justify-between gap-5">
+            <div>
+              <h1
+                className={cn(
+                  "text-6xl uppercase text-muted-foreground",
+                  vt323.className,
+                )}
+              >
+                {username}
+              </h1>
+              <div className="flex gap-2">
+                {icons.map((icon) => (
+                  <span key={icon.id}>
+                    {cardIcons.find((i) => i.id === icon.id)?.iconMd}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              {socials.map((social) => (
+                <Link
+                  href={`${socialIcons.find((s) => s.id === social.id)?.profileHref}${social.username}`}
+                  key={social.id}
+                  target="_blank"
+                  className="flex items-center gap-2"
+                >
+                  {socialIcons.find((s) => s.id === social.id)?.icon}
+                  {social.username}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section> */}
+
+      <section className="aspect-[9/12] w-96 select-none rounded-2xl border p-10">
+        <Link
+          href={`/${username}`}
+          className="flex h-full flex-col justify-between"
+        >
+          <div className="flex items-center justify-between">
             <div className="aspect-square w-12 overflow-hidden rounded-full border">
               <Image
                 src={profilePicture}
@@ -35,57 +104,44 @@ export default function UserCard({
                 className="h-full w-full object-cover"
               />
             </div>
+
+            <div>
+              <FullLogo size={100} />
+            </div>
           </div>
 
-          <div className="flex-1">
+          <div className="text-center">
             <h1 className="text-4xl font-semibold">{name || "(no name)"}</h1>
             <p className="text-sm text-muted-foreground">
               {title || "(no title)"}
             </p>
           </div>
 
-          <div className="flex flex-col items-end gap-2">
-            <FullLogo size={100} />
-            <p className="text-right text-[10px] text-muted-foreground">
-              Portfolio and Project
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-end justify-between gap-5">
-          <div>
-            <h1
-              className={cn(
-                "text-6xl uppercase text-muted-foreground",
-                vt323.className,
-              )}
-            >
-              {username}
-            </h1>
-            <div className="flex gap-2">
-              {icons.map((icon) => (
-                <span key={icon.id}>
-                  {cardIcons.find((i) => i.id === icon.id)?.iconMd}
-                </span>
+          <div className="flex justify-center">
+            <div className="flex flex-col">
+              {socials.map((social) => (
+                <Link
+                  href={`${socialIcons.find((s) => s.id === social.id)?.profileHref}${social.username}`}
+                  key={social.id}
+                  target="_blank"
+                  className="flex items-center gap-2"
+                >
+                  {socialIcons.find((s) => s.id === social.id)?.icon}
+                  {social.username}
+                </Link>
               ))}
             </div>
           </div>
 
-          <div>
-            {socials.map((social) => (
-              <Link
-                href={`${socialIcons.find((s) => s.id === social.id)?.profileHref}${social.username}`}
-                key={social.id}
-                target="_blank"
-                className="flex items-center gap-2"
-              >
-                {socialIcons.find((s) => s.id === social.id)?.icon}
-                {social.username}
-              </Link>
+          <div className="flex flex-wrap justify-center gap-2">
+            {icons.map((icon) => (
+              <span key={icon.id}>
+                {cardIcons.find((i) => i.id === icon.id)?.iconMd}
+              </span>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
+        </Link>
+      </section>
+    </>
   );
 }
