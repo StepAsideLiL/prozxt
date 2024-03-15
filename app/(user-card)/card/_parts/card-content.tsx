@@ -20,9 +20,9 @@ export default async function CardContent() {
       <div className="flex min-h-screen w-full flex-col items-center justify-center gap-3">
         <UserCard
           username={user.username}
-          profilePicture={user.profilePicture!.url}
-          name={user.card!.name}
-          title={user.card!.title}
+          profilePicture={user.profilePicture?.url}
+          name={user.card?.name}
+          title={user.card?.title}
           socials={socials}
           icons={icons}
         />
@@ -36,8 +36,8 @@ export default async function CardContent() {
 
       <section id="edit-card" className="flex justify-center py-10">
         <CardContentForm
-          initialName={user.card!.name}
-          initialTitle={user.card!.title}
+          initialName={user.card?.name}
+          initialTitle={user.card?.title}
           initialSocials={socials}
           initialIcons={icons}
         />

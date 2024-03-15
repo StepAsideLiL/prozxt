@@ -21,14 +21,14 @@ export default function CardContentForm({
   initialSocials,
   initialIcons,
 }: {
-  initialName: string;
-  initialTitle: string;
+  initialName: string | undefined;
+  initialTitle: string | undefined;
   initialSocials: CardSocials;
   initialIcons: CardIcons;
 }) {
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState(initialName);
-  const [title, setTitle] = useState(initialTitle);
+  const [name, setName] = useState(initialName || "");
+  const [title, setTitle] = useState(initialTitle || "");
   const [socials, setSocials] = useState<CardSocials>(initialSocials);
   const [icons, setIcons] = useState<CardIcons>(initialIcons);
 

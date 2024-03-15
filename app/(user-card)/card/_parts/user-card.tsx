@@ -15,9 +15,9 @@ export default function UserCard({
   icons,
 }: {
   username: string;
-  profilePicture: string;
-  name: string;
-  title: string;
+  profilePicture: string | undefined;
+  name: string | undefined;
+  title: string | undefined;
   socials: CardSocials;
   icons: CardIcons;
 }) {
@@ -40,7 +40,7 @@ export default function UserCard({
             <div>
               <div className="aspect-square w-12 overflow-hidden rounded-full border">
                 <Image
-                  src={profilePicture}
+                  src={profilePicture || ""}
                   alt={`Profile Picture of ${username}`}
                   width={50}
                   height={50}
@@ -106,7 +106,7 @@ export default function UserCard({
           <div className="flex items-center justify-between">
             <div className="aspect-square w-12 overflow-hidden rounded-full border">
               <Image
-                src={profilePicture}
+                src={profilePicture || ""}
                 alt={`Profile Picture of ${username}`}
                 width={50}
                 height={50}
