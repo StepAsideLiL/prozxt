@@ -2,6 +2,7 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import MarkdownPlugin from "./plugins/MarkdownPlugin";
+import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 
 export default function Editor() {
   return (
@@ -20,6 +21,7 @@ export default function Editor() {
         ErrorBoundary={LexicalErrorBoundary}
       />
       <MarkdownPlugin />
+      <TabIndentationPlugin />
     </div>
   );
 }
