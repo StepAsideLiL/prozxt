@@ -1,6 +1,7 @@
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import MarkdownPlugin from "./plugins/MarkdownPlugin";
 
 export default function Editor() {
   return (
@@ -18,6 +19,7 @@ export default function Editor() {
         }
         ErrorBoundary={LexicalErrorBoundary}
       />
+      <MarkdownPlugin />
     </div>
   );
 }
