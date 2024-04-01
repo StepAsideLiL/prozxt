@@ -2,12 +2,12 @@
 
 import { SerializedEditorState, SerializedLexicalNode } from "lexical";
 
-type NewPostData = {
+type NewProjectData = {
   title: string;
   editorState: SerializedEditorState<SerializedLexicalNode> | undefined;
 };
 
-export async function addNewProject(data: NewPostData) {
+export async function addNewProject(data: NewProjectData) {
   try {
     console.log(data);
   } catch (err) {
