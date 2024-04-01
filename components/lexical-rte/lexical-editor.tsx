@@ -11,8 +11,10 @@ import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { EditorState } from "lexical";
 
 export default function LexicalEditor({
+  placeholder,
   setEditorState,
 }: {
+  placeholder?: string;
   setEditorState: (editorState: EditorState) => void;
 }) {
   const initialConfig: InitialConfigType = {
@@ -27,7 +29,7 @@ export default function LexicalEditor({
   return (
     <section>
       <LexicalComposer initialConfig={initialConfig}>
-        <Editor />
+        <Editor placeholder={placeholder} />
         <OnChangePlugin
           onChange={(editorState: EditorState) => {
             setEditorState(editorState);

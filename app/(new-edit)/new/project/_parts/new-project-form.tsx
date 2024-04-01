@@ -24,7 +24,7 @@ export default function NewProjectForm() {
     <section className="mx-auto max-w-3xl space-y-6">
       <section className="flex items-center justify-between gap-5">
         <NewPostInput
-          placeholder="Post Title..."
+          placeholder="Project Title..."
           onChange={(e) => setTitle(e.target.value)}
         />
 
@@ -33,7 +33,10 @@ export default function NewProjectForm() {
         </Button>
       </section>
 
-      <LexicalEditor setEditorState={setEditorState} />
+      <LexicalEditor
+        placeholder="Project description..."
+        setEditorState={setEditorState}
+      />
     </section>
   );
 }

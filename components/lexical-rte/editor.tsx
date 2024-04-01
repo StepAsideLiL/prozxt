@@ -4,7 +4,7 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import MarkdownPlugin from "./plugins/MarkdownPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 
-export default function Editor() {
+export default function Editor({ placeholder }: { placeholder?: string }) {
   return (
     <div className="relative">
       <RichTextPlugin
@@ -14,8 +14,8 @@ export default function Editor() {
           </div>
         }
         placeholder={
-          <div className="absolute top-0 -z-50 text-muted-foreground">
-            Write...
+          <div className="absolute top-0 -z-50 text-muted">
+            {placeholder || "Write..."}
           </div>
         }
         ErrorBoundary={LexicalErrorBoundary}
