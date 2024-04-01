@@ -7,7 +7,7 @@ type NewPostData = {
   editorState: SerializedEditorState<SerializedLexicalNode> | undefined;
 };
 
-export function addNewProject(data: NewPostData) {
+export async function addNewProject(data: NewPostData) {
   try {
     console.log(data);
   } catch (err) {
