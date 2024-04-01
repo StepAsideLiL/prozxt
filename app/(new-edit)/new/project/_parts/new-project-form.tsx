@@ -29,7 +29,7 @@ export default function NewProjectForm() {
         />
 
         <Button variant={"outline"} onClick={() => handleClick()}>
-          <Plus size={16} /> Add Post
+          <Plus size={16} /> Add Project
         </Button>
       </section>
 
