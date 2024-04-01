@@ -13,7 +13,7 @@ export function Logo({
   if (variant === "link") {
     return (
       <Link href={"/"} className={cn("inline-block", className)}>
-        <LogoIcon />
+        <LogoIcon size={size} />
       </Link>
     );
   }
