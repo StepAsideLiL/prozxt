@@ -38,6 +38,7 @@ export default function NewProjectForm() {
 
   return (
     <section className="mx-auto max-w-3xl space-y-6">
+      {/* Project Title */}
       <section className="flex items-center justify-between gap-5">
         <NewPostInput
           placeholder="Project Title..."
@@ -49,6 +50,7 @@ export default function NewProjectForm() {
         </Button>
       </section>
 
+      {/* Project Tags */}
       <section className="relative flex items-center gap-4">
         {tags.length !== 0 &&
           tags.map((tag, i) => (
@@ -66,7 +68,9 @@ export default function NewProjectForm() {
           ))}
 
         {formData.tags === "" && tags.length === 0 && (
-          <div className="absolute inset-0 -z-20 text-muted">Tags...</div>
+          <div className="absolute inset-0 -z-20 text-muted-foreground/50">
+            Tags...
+          </div>
         )}
 
         <form onSubmit={(e) => hangleTagSubmit(e)} className="w-full flex-1">
@@ -82,6 +86,7 @@ export default function NewProjectForm() {
         </form>
       </section>
 
+      {/* Project Description */}
       <LexicalEditor
         placeholder="Project description..."
         setEditorState={setEditorState}
