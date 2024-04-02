@@ -4,6 +4,7 @@ import { SerializedEditorState, SerializedLexicalNode } from "lexical";
 
 type NewProjectData = {
   title: string;
+  tags: string[];
   editorState: SerializedEditorState<SerializedLexicalNode> | undefined;
 };
 

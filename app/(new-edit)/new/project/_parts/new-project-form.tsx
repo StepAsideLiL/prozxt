@@ -23,6 +23,7 @@ export default function NewProjectForm() {
   function handleClick() {
     const data = {
       title,
+      tags,
       editorState: editorState?.toJSON(),
     };
     addNewProject(data);
