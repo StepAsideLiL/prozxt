@@ -20,22 +20,13 @@
   padding-left: 16px;
 }
 .EditorTheme__h1 {
-  font-size: 24px;
-  color: hsl(var(--primary));
-  font-weight: 400;
-  margin: 0;
+  @apply mb-3 text-3xl font-bold;
 }
 .EditorTheme__h2 {
-  font-size: 15px;
-  color: rgb(101, 103, 107);
-  font-weight: 700;
-  margin: 0;
-  text-transform: uppercase;
+  @apply text-2xl font-bold;
 }
 .EditorTheme__h3 {
-  font-size: 12px;
-  margin: 0;
-  text-transform: uppercase;
+  @apply text-lg font-medium;
 }
 .EditorTheme__indent {
   --lexical-indent-base-value: 40px;
