@@ -14,7 +14,7 @@ export default function Editor({ placeholder }: { placeholder?: string }) {
           </div>
         }
         placeholder={
-          <div className="absolute top-0 -z-50 text-muted">
+          <div className="absolute top-0 -z-50 text-muted-foreground/50">
             {placeholder || "Write..."}
           </div>
         }
