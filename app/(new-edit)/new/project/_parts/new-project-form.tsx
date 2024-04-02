@@ -8,6 +8,7 @@ import { Plus } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { addNewProject } from "./actions";
 import { Badge } from "@/components/ui/badge";
+import { RemoveXBtn } from "@/components/prozxt-ui/button";
 
 type FormData = {
   tags: string;
@@ -29,7 +30,10 @@ export default function NewProjectForm() {
 
   function hangleTagSubmit(e: FormEvent) {
     e.preventDefault();
-    console.log(formData);
+    if (formData.tags !== "") {
+      tags.push(formData.tags);
+      setFormData({ tags: "" });
+    }
   }
 
   return (
@@ -45,19 +49,32 @@ export default function NewProjectForm() {
         </Button>
       </section>
 
-      <section className="relative">
+      <section className="relative flex items-center gap-4">
         {tags.length !== 0 &&
-          tags.map((tag, i) => <Badge key={i}>{tag}</Badge>)}
+          tags.map((tag, i) => (
+            <div key={i} className="relative">
+              <Badge>{tag}</Badge>
+              <RemoveXBtn
+                variant={"close"}
+                size={"close"}
+                className="absolute -right-2 top-0"
+                onClick={() => {
+                  setTags(tags.filter((t) => t !== tag));
+                }}
+              />
+            </div>
+          ))}
 
         {formData.tags === "" && tags.length === 0 && (
           <div className="absolute inset-0 -z-20 text-muted">Tags...</div>
         )}
 
-        <form onSubmit={(e) => hangleTagSubmit(e)}>
+        <form onSubmit={(e) => hangleTagSubmit(e)} className="w-full flex-1">
           <TagInput
             name="tags"
             value={formData.tags}
             onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+            className=""
           />
           <Button type="submit" className="sr-only">
             Add Tag
