@@ -10,6 +10,7 @@ import {
 import Logout from "@/components/prozxt-ui/logout";
 import { User } from "lucide-react";
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 export function UserProfileSidebar({
   children,
@@ -30,26 +31,32 @@ export function UserProfileSidebar({
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
 
-      <SheetContent className="space-y-6">
+      <SheetContent className="space-y-3">
         <SheetHeader className="flex-row items-start gap-2 space-y-0">
           {children}
 
           <SheetTitle>{username}</SheetTitle>
         </SheetHeader>
 
-        <section>
-          {menus.map((menu) => (
-            <Link
-              key={menu.href}
-              href={menu.href}
-              className="flex items-center gap-2 rounded p-2 text-sm hover:bg-muted/70"
-            >
-              <menu.icon size={20} /> {menu.title}
-            </Link>
-          ))}
-        </section>
+        <Separator />
 
-        <Logout />
+        <section className="space-y-2">
+          <div>
+            {menus.map((menu) => (
+              <Link
+                key={menu.href}
+                href={menu.href}
+                className="flex items-center gap-2 rounded p-2 text-sm hover:bg-muted/70"
+              >
+                <menu.icon size={20} /> {menu.title}
+              </Link>
+            ))}
+          </div>
+
+          <Separator />
+
+          <Logout />
+        </section>
       </SheetContent>
     </Sheet>
   );
