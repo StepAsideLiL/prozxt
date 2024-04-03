@@ -82,3 +82,7 @@ export function CardContentSkeleton() {
     </>
   );
 }
+
+export function UserAvatarSkeleton() {
+  return <Skeleton className="h-10 w-10 rounded-full" />;
+}
