@@ -32,7 +32,7 @@ async function UserAvatarSidebar() {
 
   return (
     <Suspense fallback={<UserAvatarSkeleton />}>
-      <UserProfileSidebar>
+      <UserProfileSidebar username={user.username}>
         <Avatar className="cursor-pointer">
           <AvatarImage src={user.profilePicture?.url} />
           <AvatarFallback>{user.username[0].toUpperCase()}</AvatarFallback>
