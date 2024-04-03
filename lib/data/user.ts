@@ -1,7 +1,9 @@
 "use server";
 
 import prisma from "@/lib/prismadb";
-import { validateRequest } from "@/lib/auth";
+import { lucia, validateRequest } from "@/lib/auth";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function getUser(username: string) {
   try {
@@ -46,4 +48,23 @@ export async function getCurrentUser() {
     console.log(err);
     throw new Error(`Failed to get current user.`);
   }
+}
+
+export async function logout() {
+  const { session } = await validateRequest();
+  if (!session) {
+    return {
+      error: "Unauthorized",
+    };
+  }
+
+  await lucia.invalidateSession(session.id);
+
+  const sessionCookie = lucia.createBlankSessionCookie();
+  cookies().set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes,
+  );
+  return redirect("/");
 }
