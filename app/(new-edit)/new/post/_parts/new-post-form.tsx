@@ -15,7 +15,7 @@ export default function NewPostForm() {
   function handleClick() {
     const data = {
       title,
-      editorState: editorState?.toJSON(),
+      editorState: JSON.stringify(editorState),
     };
     addNewPost(data);
   }

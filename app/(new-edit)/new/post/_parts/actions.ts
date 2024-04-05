@@ -4,7 +4,7 @@ import { SerializedEditorState, SerializedLexicalNode } from "lexical";
 
 type NewPostData = {
   title: string;
-  editorState: SerializedEditorState<SerializedLexicalNode> | undefined;
+  editorState: string;
 };
 
 export async function addNewPost(data: NewPostData) {
