@@ -8,9 +8,15 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Logout from "@/components/prozxt-ui/logout";
-import { Home, Settings, StickyNote, User } from "lucide-react";
+import { Home, User } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import {
+  TbPencil,
+  TbPencilPlus,
+  TbSettings,
+  TbSettingsPlus,
+} from "react-icons/tb";
 
 export function UserProfileSidebar({
   children,
@@ -31,17 +37,27 @@ export function UserProfileSidebar({
         href: `/${username}`,
         icon: User,
       },
+      {
+        title: "Posts",
+        href: `/${username}/posts`,
+        icon: TbPencil,
+      },
+      {
+        title: "Profile",
+        href: `/${username}/projects`,
+        icon: TbSettings,
+      },
     ],
     newPost: [
       {
         title: "New Post",
         href: "/new/post",
-        icon: StickyNote,
+        icon: TbPencilPlus,
       },
       {
         title: "New Project",
         href: "/new/project",
-        icon: Settings,
+        icon: TbSettingsPlus,
       },
     ],
   };
