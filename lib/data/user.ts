@@ -24,14 +24,12 @@ export async function getUser(username: string) {
   }
 }
 
-export async function getCurrentUser() {
+export async function getCurrentUser(userID: string | undefined) {
   try {
-    const { user } = await validateRequest();
-
-    if (user) {
+    if (userID) {
       const currentUser = await prisma.user.findUnique({
         where: {
-          username: user.username,
+          id: userID,
         },
         select: {
           id: true,

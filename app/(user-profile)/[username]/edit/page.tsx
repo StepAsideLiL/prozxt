@@ -1,18 +1,20 @@
 import ImgbbUploadForm from "./_parts/imgbb-upload-form";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/data/user";
+import { validateRequest } from "@/lib/auth";
 
 export default async function Page() {
-  const user = await getCurrentUser();
+  const { user } = await validateRequest();
+  const currentUser = await getCurrentUser(user?.id);
 
   if (!user) {
     redirect("/auth/sign-in");
   }
 
   const profilePicture = {
-    name: user.profilePicture?.title || "",
-    mime: user.profilePicture?.mime || "",
-    url: user.profilePicture?.url || "",
+    name: currentUser?.profilePicture?.title || "",
+    mime: currentUser?.profilePicture?.mime || "",
+    url: currentUser?.profilePicture?.url || "",
   };
 
   return (
