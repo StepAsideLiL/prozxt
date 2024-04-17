@@ -40,7 +40,7 @@ export default function NewPostForm({
 
       if (res.success) {
         toast.success(res.message);
-        router.push(`/${username}/post/${res.postId}`);
+        router.push(`/${username}/posts/${res.postId}`);
       } else {
         toast.error(res.message);
       }
