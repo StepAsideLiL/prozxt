@@ -7,17 +7,46 @@ import { EditorState } from "lexical";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { addNewPost } from "./actions";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-export default function NewPostForm() {
+export default function NewPostForm({
+  username,
+  userId,
+}: {
+  username: string;
+  userId: string;
+}) {
   const [title, setTitle] = useState("");
   const [editorState, setEditorState] = useState<EditorState>();
+  const router = useRouter();
 
-  function handleClick() {
+  async function handleClick() {
     const data = {
+      userId,
       title,
-      editorState: JSON.stringify(editorState),
+      editorState: editorState?.toJSON() || "",
     };
-    addNewPost(data);
+
+    if (
+      title.length !== 0 &&
+      !!editorState?.toJSON().root.children &&
+      editorState?.toJSON().root.children.length >= 1 &&
+      // @ts-ignore: Unreachable code error
+      editorState?.toJSON().root.children[0].children.length > 0
+    ) {
+      console.log(data);
+      const res = await addNewPost(data);
+
+      if (res.success) {
+        toast.success(res.message);
+        router.push(`/${username}/post/${res.postId}`);
+      } else {
+        toast.error(res.message);
+      }
+    } else {
+      toast.error("Write something First!");
+    }
   }
 
   return (
@@ -25,6 +54,7 @@ export default function NewPostForm() {
       <section className="flex items-center justify-between gap-5">
         <NewPostInput
           placeholder="Post Title..."
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
