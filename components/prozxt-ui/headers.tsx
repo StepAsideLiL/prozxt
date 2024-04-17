@@ -5,6 +5,9 @@ import { getCurrentUser } from "@/lib/data/user";
 import { UserProfileSidebar } from "@/components/prozxt-ui/nav-menus";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserAvatarSkeleton } from "@/components/prozxt-ui/skeletons";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { validateRequest } from "@/lib/auth";
 
 export function HomeHeader() {
   return (
@@ -18,7 +21,9 @@ export function HomeHeader() {
 
         <div className="flex items-center gap-5">
           <ModeToggle />
-          <UserAvatarSidebar />
+          <Suspense fallback={<UserAvatarSkeleton />}>
+            <UserAvatarSidebar />
+          </Suspense>
         </div>
       </header>
     </div>
@@ -36,27 +41,37 @@ export function NewEditHeader({ title }: { title?: string }) {
 
       <div className="flex items-center gap-5">
         <ModeToggle />
-        <UserAvatarSidebar />
+        <Suspense fallback={<UserAvatarSkeleton />}>
+          <UserAvatarSidebar />
+        </Suspense>
       </div>
     </header>
   );
 }
 
 async function UserAvatarSidebar() {
-  const user = await getCurrentUser();
+  const { user } = await validateRequest();
+  const currentUser = await getCurrentUser(user?.id);
 
   if (!user) {
-    return null;
+    return (
+      <>
+        <Button asChild>
+          <Link href={"/auth/sign-up"}>Sign Up</Link>
+        </Button>
+        <Button variant={"outline"} asChild>
+          <Link href={"/auth/sign-in"}>Sign In</Link>
+        </Button>
+      </>
+    );
   }
 
   return (
-    <Suspense fallback={<UserAvatarSkeleton />}>
-      <UserProfileSidebar username={user.username}>
-        <Avatar className="cursor-pointer">
-          <AvatarImage src={user.profilePicture?.url} />
-          <AvatarFallback>{user.username[0].toUpperCase()}</AvatarFallback>
-        </Avatar>
-      </UserProfileSidebar>
-    </Suspense>
+    <UserProfileSidebar username={user.username}>
+      <Avatar className="cursor-pointer">
+        <AvatarImage src={currentUser?.profilePicture?.url} />
+        <AvatarFallback>{user.username[0].toUpperCase()}</AvatarFallback>
+      </Avatar>
+    </UserProfileSidebar>
   );
 }
