@@ -70,16 +70,18 @@ export default function NewProjectForm({
   return (
     <section className="mx-auto max-w-3xl space-y-6">
       {/* Project Title */}
-      <section className="flex items-center justify-between gap-5">
-        <NewPostInput
-          placeholder="Project Title..."
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <Button
+        variant={"outline"}
+        onClick={() => handleClick()}
+        className="gap-1"
+      >
+        <Plus size={16} /> Publish Project
+      </Button>
 
-        <Button variant={"outline"} onClick={() => handleClick()}>
-          <Plus size={16} /> Add Project
-        </Button>
-      </section>
+      <NewPostInput
+        placeholder="Project Title..."
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
       {/* Project Description */}
       <ScrollArea className="h-96 w-full">

@@ -51,17 +51,19 @@ export default function NewPostForm({
 
   return (
     <section className="mx-auto max-w-3xl space-y-6">
-      <section className="flex items-center justify-between gap-5">
-        <NewPostInput
-          placeholder="Post Title..."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <Button
+        variant={"outline"}
+        onClick={() => handleClick()}
+        className="gap-1"
+      >
+        <Plus size={16} /> Publish Post
+      </Button>
 
-        <Button variant={"outline"} onClick={() => handleClick()}>
-          <Plus size={16} /> Add Post
-        </Button>
-      </section>
+      <NewPostInput
+        placeholder="Post Title..."
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
       <LexicalEditor setEditorState={setEditorState} />
     </section>
