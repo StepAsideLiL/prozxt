@@ -29,7 +29,7 @@ export async function addNewPost(data: NewPostData) {
       return {
         postId: post.id,
         success: true,
-        message: "Post is saved!",
+        message: "Post is published!",
       };
     } else {
       return {
