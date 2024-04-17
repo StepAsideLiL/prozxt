@@ -43,7 +43,7 @@ export function UserProfileSidebar({
         icon: TbPencil,
       },
       {
-        title: "Profile",
+        title: "Projects",
         href: `/${username}/projects`,
         icon: TbSettings,
       },
