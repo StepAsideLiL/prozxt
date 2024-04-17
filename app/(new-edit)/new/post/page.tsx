@@ -6,7 +6,7 @@ export default async function Page() {
 
   return (
     <main className="container space-y-10 py-3">
-      <NewPostForm userId={user!.id} />
+      <NewPostForm username={user!.username} userId={user!.id} />
     </main>
   );
 }
