@@ -4,7 +4,7 @@ import LexicalEditor from "@/components/lexical-rte/lexical-editor";
 import { NewPostInput, TagInput } from "@/components/prozxt-ui/input";
 import { Button } from "@/components/ui/button";
 import { EditorState } from "lexical";
-import { Plus } from "lucide-react";
+import { Plus, RotateCw } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { addNewProject } from "./actions";
 import { Badge } from "@/components/ui/badge";
@@ -29,9 +29,12 @@ export default function NewProjectForm({
   const [formData, setFormData] = useState<FormData>({ tags: "" });
   const [tags, setTags] = useState<string[]>([]);
   const [editorState, setEditorState] = useState<EditorState>();
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   async function handleClick() {
+    setLoading(true);
+
     const data = {
       userId,
       title,
@@ -53,9 +56,11 @@ export default function NewProjectForm({
         router.push(`/${username}/projects/${res.projectId}`);
       } else {
         toast.error(res.message);
+        setLoading(false);
       }
     } else {
       toast.error("Write something First!");
+      setLoading(false);
     }
   }
 
@@ -70,13 +75,20 @@ export default function NewProjectForm({
   return (
     <section className="mx-auto max-w-3xl space-y-6">
       {/* Project Title */}
-      <Button
-        variant={"outline"}
-        onClick={() => handleClick()}
-        className="gap-1"
-      >
-        <Plus size={16} /> Publish Project
-      </Button>
+      {loading ? (
+        <Button variant={"outline"} disabled className="gap-1">
+          <RotateCw className="mr-2 h-4 w-4 animate-spin" size={16} />
+          Publishing...
+        </Button>
+      ) : (
+        <Button
+          variant={"outline"}
+          onClick={() => handleClick()}
+          className="gap-1"
+        >
+          <Plus size={16} /> Publish Project
+        </Button>
+      )}
 
       <NewPostInput
         placeholder="Project Title..."
