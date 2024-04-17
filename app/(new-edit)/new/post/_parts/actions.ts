@@ -2,7 +2,6 @@
 
 import prisma from "@/lib/prismadb";
 import { SerializedEditorState, SerializedLexicalNode } from "lexical";
-import { redirect } from "next/navigation";
 
 type NewPostData = {
   userId: string;
