@@ -1,9 +1,12 @@
+import { validateRequest } from "@/lib/auth";
 import NewPostForm from "./_parts/new-post-form";
 
-export default function Page() {
+export default async function Page() {
+  const { user } = await validateRequest();
+
   return (
     <main className="container space-y-10 py-3">
-      <NewPostForm />
+      <NewPostForm userId={user!.id} />
     </main>
   );
 }
