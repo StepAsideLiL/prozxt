@@ -5,6 +5,25 @@ import { lucia, validateRequest } from "@/lib/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+export async function isUserExist(username: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        username: username,
+      },
+    });
+
+    if (user) {
+      return true;
+    } else {
+      false;
+    }
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Failed to check if user exists.`);
+  }
+}
+
 export async function getUser(username: string) {
   try {
     const user = await prisma.user.findUnique({
