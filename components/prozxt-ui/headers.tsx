@@ -30,6 +30,25 @@ export function HomeHeader() {
   );
 }
 
+export function NoUserHeader() {
+  return (
+    <div className="border-b">
+      <header className="container flex items-center justify-between py-3">
+        <div className="flex items-center gap-5">
+          <Logo size={24} variant="link" />
+        </div>
+
+        <div className="flex items-center gap-5">
+          <ModeToggle />
+          <Suspense fallback={<UserAvatarSkeleton />}>
+            <UserAvatarSidebar />
+          </Suspense>
+        </div>
+      </header>
+    </div>
+  );
+}
+
 export function NewEditHeader({ title }: { title?: string }) {
   return (
     <header className="container flex items-center justify-between py-3">
