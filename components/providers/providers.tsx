@@ -1,3 +1,4 @@
+import ReactQueryProvider from "./react-query-provider";
 import { ThemeProvider } from "./theme-provider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -9,7 +10,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         enableSystem
         disableTransitionOnChange
       >
-        {children}
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </ThemeProvider>
     </>
   );
