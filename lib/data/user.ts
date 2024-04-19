@@ -24,7 +24,7 @@ export async function isUserExist(username: string) {
   }
 }
 
-export async function getUser(username: string) {
+export async function getUserByUsername(username: string) {
   try {
     const user = await prisma.user.findUnique({
       where: {

@@ -1,13 +1,13 @@
 import Logout from "@/components/prozxt-ui/logout";
 import { validateRequest } from "@/lib/auth";
-import { getUser } from "@/lib/data/user";
+import { getUserByUsername } from "@/lib/data/user";
 
 export default async function Page({
   params,
 }: {
   params: { username: string };
 }) {
-  const userInfo = await getUser(params.username);
+  const userInfo = await getUserByUsername(params.username);
   const { user } = await validateRequest();
 
   return (
