@@ -1,13 +1,18 @@
 import React, { Suspense } from "react";
 import ModeToggle from "@/components/prozxt-ui/mode-toggle";
 import { Logo } from "@/components/prozxt-ui/logo";
-import { getCurrentUser } from "@/lib/data/user";
+import { getCurrentUser, getUserByUsername } from "@/lib/data/user";
 import { UserProfileSidebar } from "@/components/prozxt-ui/nav-menus";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { UserAvatarSkeleton } from "@/components/prozxt-ui/skeletons";
+import {
+  UserAvatarSkeleton,
+  UserProfileAvatarSkeleton,
+} from "@/components/prozxt-ui/skeletons";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { validateRequest } from "@/lib/auth";
+import ProfileSubPage from "./client-components";
+import { RxSlash } from "react-icons/rx";
 
 export function HomeHeader() {
   return (
@@ -65,6 +70,48 @@ export function NewEditHeader({ title }: { title?: string }) {
         </Suspense>
       </div>
     </header>
+  );
+}
+
+export function ProfileHeader({ username }: { username: string }) {
+  return (
+    <div className="bg-muted/25">
+      <header className="container flex items-center justify-between py-3">
+        <div className="flex items-center gap-5">
+          <Logo size={24} variant="link" />
+
+          <RxSlash size={20} className="text-muted-foreground" />
+
+          <Suspense fallback={<UserProfileAvatarSkeleton />}>
+            <UserProfileAvatar username={username} />
+          </Suspense>
+
+          <ProfileSubPage />
+        </div>
+
+        <div className="flex items-center gap-5">
+          <ModeToggle />
+          <Suspense fallback={<UserAvatarSkeleton />}>
+            <UserAvatarSidebar />
+          </Suspense>
+        </div>
+      </header>
+    </div>
+  );
+}
+
+async function UserProfileAvatar({ username }: { username: string }) {
+  const user = await getUserByUsername(username);
+
+  return (
+    <Link href={`/${username}`} className="flex items-center gap-3">
+      <Avatar className="h-7 w-7 cursor-pointer">
+        <AvatarImage src={user?.profilePicture?.url} />
+        <AvatarFallback>{user?.username[0].toUpperCase()}</AvatarFallback>
+      </Avatar>
+
+      <h1>{username}</h1>
+    </Link>
   );
 }
 
