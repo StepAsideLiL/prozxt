@@ -86,3 +86,13 @@ export function CardContentSkeleton() {
 export function UserAvatarSkeleton() {
   return <Skeleton className="h-10 w-10 rounded-full" />;
 }
+
+export function UserProfileAvatarSkeleton() {
+  return (
+    <div className="flex items-center gap-3">
+      <Skeleton className="h-7 w-7 rounded-full" />
+
+      <Skeleton className="h-4 w-10" />
+    </div>
+  );
+}
