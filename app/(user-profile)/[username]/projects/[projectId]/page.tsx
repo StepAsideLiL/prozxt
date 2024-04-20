@@ -1,15 +1,15 @@
 import { Suspense } from "react";
-import UserPost from "./_parts/user-post";
+import UserProject from "./_parts/user-project";
 
 export default function Page({
   params,
 }: {
-  params: { username: string; post: string };
+  params: { username: string; projectId: string };
 }) {
   return (
     <main className="container space-y-10 py-3">
       <Suspense fallback={"loading"}>
-        <UserPost username={params.username} postId={params.post} />
+        <UserProject username={params.username} projectId={params.projectId} />
       </Suspense>
     </main>
   );
