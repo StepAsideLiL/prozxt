@@ -33,6 +33,13 @@ export async function getUserByUsername(username: string) {
       select: {
         id: true,
         username: true,
+        profilePicture: {
+          select: {
+            width: true,
+            height: true,
+            url: true,
+          },
+        },
       },
     });
 
