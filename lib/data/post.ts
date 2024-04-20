@@ -38,3 +38,38 @@ export async function getUserPostsByUsername(username: string) {
     throw new Error("Failed to fetch user posts.");
   }
 }
+
+export async function getPostById(postId: string) {
+  try {
+    const post = await prisma.post.findUnique({
+      where: {
+        id: postId,
+      },
+      select: {
+        id: true,
+        title: true,
+        body: true,
+        createdAt: true,
+        updatedAt: true,
+        user: {
+          select: {
+            id: true,
+            username: true,
+            profilePicture: {
+              select: {
+                width: true,
+                height: true,
+                url: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return post;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch post.");
+  }
+}
