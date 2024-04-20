@@ -16,7 +16,9 @@ export default function ProfileSubPage() {
     <div className="flex items-center gap-3">
       <RxSlash size={20} className="text-muted-foreground" />
 
-      {pagename[0].toUpperCase() + pagename.slice(1)}
+      <p className="font-medium">
+        {pagename[0].toUpperCase() + pagename.slice(1)}
+      </p>
     </div>
   );
 }
