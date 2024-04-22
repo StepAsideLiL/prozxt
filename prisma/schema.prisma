@@ -21,6 +21,7 @@ model User {
   sessions       Session[]
   card           Card?
   profilePicture Image?
+  portfolio      Portfolio?
   posts          Post[]
   projects       Project[]
 }
@@ -58,6 +59,15 @@ model Card {
   icons   String @default("")
   socials String @default("")
   style   String @default("")
+
+  userId String @unique
+  user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model Portfolio {
+  id String @id @unique @default(cuid())
+
+  body String @default("")
 
   userId String @unique
   user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
