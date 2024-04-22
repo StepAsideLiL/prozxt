@@ -11,8 +11,6 @@ import { Badge } from "@/components/ui/badge";
 import { RemoveXBtn } from "@/components/prozxt-ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 type FormData = {
   tags: string;
@@ -103,8 +101,6 @@ export default function NewProjectForm({
             setEditorState={setEditorState}
           />
         </section>
-
-        {/* <Separator /> */}
 
         {/* Project Tags */}
         <section className="col-span-1 flex flex-col items-start gap-4">
