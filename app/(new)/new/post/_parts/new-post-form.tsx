@@ -59,7 +59,7 @@ export default function NewPostForm({
       {loading ? (
         <Button variant={"outline"} disabled className="gap-1">
           <RotateCw className="mr-2 h-4 w-4 animate-spin" size={16} />{" "}
-          Publishing...
+          Posting...
         </Button>
       ) : (
         <Button
@@ -67,17 +67,21 @@ export default function NewPostForm({
           onClick={() => handleClick()}
           className="gap-1"
         >
-          <Plus size={16} /> Publish Post
+          <Plus size={16} /> Post
         </Button>
       )}
 
-      <NewPostInput
-        placeholder="Post Title..."
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <section className="space-y-6">
+        {/* Post Title */}
+        <NewPostInput
+          placeholder="Post Title..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-      <LexicalEditor setEditorState={setEditorState} />
+        {/* Post Body */}
+        <LexicalEditor setEditorState={setEditorState} />
+      </section>
     </section>
   );
 }
