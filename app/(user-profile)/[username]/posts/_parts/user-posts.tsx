@@ -1,12 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { validateRequest } from "@/lib/auth";
 import { getUserPostsByUsername } from "@/lib/data/post";
 import Link from "next/link";
 import { format, formatDistanceToNow } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function UserPosts({ username }: { username: string }) {
-  const { user } = await validateRequest();
   const posts = await getUserPostsByUsername(username);
 
   return (
