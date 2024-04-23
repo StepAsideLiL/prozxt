@@ -3,6 +3,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getProjctById } from "@/lib/data/project";
 import Link from "next/link";
 import { format, formatDistanceToNow } from "date-fns";
+import { validateRequest } from "@/lib/auth";
+import { Button } from "@/components/ui/button";
+import { Edit } from "lucide-react";
 
 export default async function UserProject({
   username,
@@ -11,10 +14,24 @@ export default async function UserProject({
   username: string;
   projectId: string;
 }) {
+  const { user } = await validateRequest();
   const project = await getProjctById(projectId);
 
   return (
     <section className="mx-auto max-w-3xl space-y-6">
+      {user?.username === username && (
+        <>
+          <Button variant={"outline"} asChild>
+            <Link
+              href={`/${username}/posts/${projectId}/edit`}
+              className="gap-1"
+            >
+              <Edit size={16} /> Edit
+            </Link>
+          </Button>
+        </>
+      )}
+
       {project ? (
         <>
           <div className="space-y-4">
