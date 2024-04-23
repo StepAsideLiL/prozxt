@@ -8,7 +8,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Logout from "@/components/prozxt-ui/logout";
-import { Home, User } from "lucide-react";
+import { BriefcaseBusiness, Home, User } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -36,6 +36,11 @@ export function UserProfileSidebar({
         title: "Profile",
         href: `/${username}`,
         icon: User,
+      },
+      {
+        title: "Portfolio",
+        href: `/${username}/portfolio`,
+        icon: BriefcaseBusiness,
       },
       {
         title: "Posts",
