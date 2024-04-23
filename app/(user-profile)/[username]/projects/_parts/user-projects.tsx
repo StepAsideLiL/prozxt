@@ -4,13 +4,24 @@ import { validateRequest } from "@/lib/auth";
 import { getUserProjectsByUsername } from "@/lib/data/project";
 import Link from "next/link";
 import { format, formatDistanceToNow } from "date-fns";
+import { Plus } from "lucide-react";
 
 export default async function UserProjects({ username }: { username: string }) {
   const { user } = await validateRequest();
   const projects = await getUserProjectsByUsername(username);
 
   return (
-    <section className="mx-auto max-w-3xl">
+    <section className="mx-auto max-w-3xl space-y-3">
+      {user?.username === username && projects.length !== 0 && (
+        <>
+          <Button variant={"outline"} asChild>
+            <Link href={`/new/project`} className="gap-1">
+              <Plus size={16} /> New Project
+            </Link>
+          </Button>
+        </>
+      )}
+
       {projects.length !== 0 ? (
         <section className="space-y-3">
           {projects.map((project) => (
@@ -60,7 +71,7 @@ export default async function UserProjects({ username }: { username: string }) {
           ))}
         </section>
       ) : (
-        <div className="py-20">
+        <div className="flex flex-col items-center justify-center gap-2 py-20">
           <h1 className="text-center text-2xl text-muted-foreground">
             No Project Found
           </h1>
