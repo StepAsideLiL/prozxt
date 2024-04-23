@@ -87,7 +87,7 @@ export default function NewProjectForm({
         </Button>
       )}
 
-      <div className="grid grid-cols-6 place-content-start">
+      <div className="grid grid-cols-6 place-content-start gap-2">
         <section className="col-span-5 space-y-6">
           {/* Project Title */}
           <NewPostInput
