@@ -4,6 +4,8 @@ import { getPostById } from "@/lib/data/post";
 import Link from "next/link";
 import { format, formatDistanceToNow } from "date-fns";
 import { validateRequest } from "@/lib/auth";
+import { Button } from "@/components/ui/button";
+import { Edit } from "lucide-react";
 
 export default async function UserPost({
   username,
@@ -12,10 +14,21 @@ export default async function UserPost({
   username: string;
   postId: string;
 }) {
+  const { user } = await validateRequest();
   const post = await getPostById(postId);
 
   return (
     <section className="mx-auto max-w-3xl space-y-6">
+      {user?.username === username && (
+        <>
+          <Button variant={"outline"} asChild>
+            <Link href={`/${username}/posts/${postId}/edit`} className="gap-1">
+              <Edit size={16} /> Edit
+            </Link>
+          </Button>
+        </>
+      )}
+
       {post ? (
         <article className="space-y-4">
           <h1 className="text-4xl font-bold">{post.title}</h1>
