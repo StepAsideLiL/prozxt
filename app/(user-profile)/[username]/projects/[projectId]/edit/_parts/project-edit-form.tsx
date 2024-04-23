@@ -92,53 +92,61 @@ export default function ProjectEditForm({
         </Button>
       )}
 
-      <NewPostInput
-        placeholder="Project Title..."
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-
-      {/* Project Description */}
-      <ScrollArea className="h-96 w-full">
-        <LexicalEditor
-          placeholder="Project description..."
-          content={projectBody}
-          setEditorState={setEditorState}
-        />
-      </ScrollArea>
-
-      <Separator />
-
-      {/* Project Tags */}
-      <section className="relative flex flex-wrap items-center gap-4">
-        {tags.length !== 0 &&
-          tags.map((tag, i) => (
-            <div key={i} className="relative">
-              <Badge>{tag}</Badge>
-              <RemoveXBtn
-                variant={"close"}
-                size={"close"}
-                className="absolute -right-2 top-0"
-                onClick={() => {
-                  setTags(tags.filter((t) => t !== tag));
-                }}
-              />
-            </div>
-          ))}
-
-        <form onSubmit={(e) => hangleTagSubmit(e)} className="w-full flex-1">
-          <TagInput
-            name="tags"
-            value={formData.tags}
-            placeholder="Add tags..."
-            onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-            className="w-full"
+      <div className="grid grid-cols-6 place-content-start gap-2">
+        <section className="col-span-5 space-y-6">
+          {/* Project Title */}
+          <NewPostInput
+            placeholder="Project Title..."
+            value={projectTitle}
+            onChange={(e) => setTitle(e.target.value)}
           />
-          <Button type="submit" className="sr-only">
-            Add Tag
-          </Button>
-        </form>
-      </section>
+
+          {/* Project Description */}
+          <LexicalEditor
+            placeholder="Project description..."
+            setEditorState={setEditorState}
+            content={projectBody}
+          />
+        </section>
+
+        {/* Project Tags */}
+        <section className="col-span-1 flex flex-col items-start gap-4">
+          {tags.length !== 0 &&
+            tags.map((tag, i) => (
+              <div key={i} className="relative">
+                <Badge>{tag}</Badge>
+                <RemoveXBtn
+                  variant={"close"}
+                  size={"close"}
+                  className="absolute -right-2 top-0"
+                  onClick={() => {
+                    setTags(tags.filter((t) => t !== tag));
+                  }}
+                />
+              </div>
+            ))}
+
+          {tags.length < 5 && (
+            <form
+              onSubmit={(e) => hangleTagSubmit(e)}
+              className="w-full flex-1"
+            >
+              <TagInput
+                name="tags"
+                value={formData.tags}
+                placeholder="Add tags..."
+                onChange={(e) =>
+                  setFormData({ ...formData, tags: e.target.value })
+                }
+                className="w-full"
+              />
+              <Button type="submit" className="sr-only">
+                Add Tag
+              </Button>
+            </form>
+          )}
+        </section>
+      </div>
     </section>
   );
 }
