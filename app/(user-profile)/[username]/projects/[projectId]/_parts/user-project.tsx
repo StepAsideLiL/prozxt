@@ -23,7 +23,7 @@ export default async function UserProject({
         <>
           <Button variant={"outline"} asChild>
             <Link
-              href={`/${username}/posts/${projectId}/edit`}
+              href={`/${username}/projects/${projectId}/edit`}
               className="gap-1"
             >
               <Edit size={16} /> Edit
