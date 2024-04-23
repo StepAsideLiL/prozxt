@@ -1,12 +1,19 @@
 import { getProjctById } from "@/lib/data/project";
 import ProjectEditForm from "./_parts/project-edit-form";
+import { validateRequest } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function Page({
   params,
 }: {
-  params: { projectId: string };
+  params: { username: string; projectId: string };
 }) {
+  const { user } = await validateRequest();
   const project = await getProjctById(params.projectId);
+
+  if (user?.username !== params.username) {
+    redirect("/auth/sign-in");
+  }
 
   return (
     <main className="container space-y-10 py-3">
