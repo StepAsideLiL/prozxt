@@ -1,8 +1,19 @@
 import { getPostById } from "@/lib/data/post";
 import PostEditForm from "./_parts/post-edit-form";
+import { validateRequest } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-export default async function Page({ params }: { params: { postId: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: { username: string; postId: string };
+}) {
+  const { user } = await validateRequest();
   const post = await getPostById(params.postId);
+
+  if (user?.username !== params.username) {
+    redirect("/auth/sign-in");
+  }
 
   return (
     <main className="container space-y-10 py-3">
