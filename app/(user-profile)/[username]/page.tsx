@@ -1,7 +1,7 @@
 import Logout from "@/components/prozxt-ui/logout";
 import { validateRequest } from "@/lib/auth";
 import { getUserByUsername } from "@/lib/data/user";
-import UserProfileInfos from "./_parts/user-profile-info";
+import UserProfileOverview from "./_parts/user-profile-overview";
 import { Suspense } from "react";
 
 export default async function Page({
@@ -15,7 +15,7 @@ export default async function Page({
   return (
     <main className="container space-y-10 py-3">
       <Suspense>
-        <UserProfileInfos username={params.username} />
+        <UserProfileOverview username={params.username} />
       </Suspense>
 
       {userInfo ? (
