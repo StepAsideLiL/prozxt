@@ -110,12 +110,38 @@ export async function followUser(followerId: string, followingId: string) {
     } else {
       return {
         success: false,
-        message: "Failed to follow.",
+        message: "Failed to follow!",
       };
     }
   } catch (err) {
     console.log(err);
     throw new Error("Failed to perform follow user function.");
+  }
+}
+
+export async function unfollowUser(followerId: string, followingId: string) {
+  try {
+    const unfollow = await prisma.follow.deleteMany({
+      where: {
+        followerId: followerId,
+        followingId: followingId,
+      },
+    });
+
+    if (unfollow) {
+      return {
+        success: true,
+        message: "Unfollowed successfully!",
+      };
+    } else {
+      return {
+        success: false,
+        message: "Failed to unfollow!",
+      };
+    }
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to perform unfollowUser function.");
   }
 }
 
