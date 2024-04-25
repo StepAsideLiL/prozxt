@@ -1,7 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { validateRequest } from "@/lib/auth";
-import { getUserByUsername } from "@/lib/data/user";
+import {
+  getUserByUsername,
+  isCurrentUserFollowingProfileUser,
+} from "@/lib/data/user";
 import Link from "next/link";
 import FollowUser from "./follow-user";
 
@@ -12,6 +15,10 @@ export default async function UserProfileOverview({
 }) {
   const { user } = await validateRequest();
   const userProfile = await getUserByUsername(username);
+  const isFollewing = await isCurrentUserFollowingProfileUser(
+    userProfile!.id,
+    user!.id,
+  );
 
   return (
     <section className="mx-auto flex max-w-3xl gap-5 space-y-3">
@@ -29,7 +36,12 @@ export default async function UserProfileOverview({
             <Link href={`${username}/edit`}>Edit Profile</Link>
           </Button>
         ) : (
-          <FollowUser />
+          <FollowUser
+            isFollewing={isFollewing}
+            userId={userProfile!.id}
+            username={username}
+            currentUserId={user!.id}
+          />
         )}
       </div>
     </section>
