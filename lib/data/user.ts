@@ -92,3 +92,29 @@ export async function logout() {
   );
   return redirect("/");
 }
+
+export async function followUser(followerId: string, followingId: string) {
+  try {
+    const follow = await prisma.follow.create({
+      data: {
+        followerId: followerId,
+        followingId: followingId,
+      },
+    });
+
+    if (follow) {
+      return {
+        success: true,
+        message: "Followed successfully!",
+      };
+    } else {
+      return {
+        success: false,
+        message: "Failed to follow.",
+      };
+    }
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to perform follow user function.");
+  }
+}
