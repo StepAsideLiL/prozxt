@@ -118,3 +118,27 @@ export async function followUser(followerId: string, followingId: string) {
     throw new Error("Failed to perform follow user function.");
   }
 }
+
+export async function isCurrentUserFollowingProfileUser(
+  followerId: string,
+  followingId: string,
+) {
+  try {
+    const isFollowing = await prisma.follow.findFirst({
+      where: {
+        followerId: followerId,
+        followingId: followingId,
+      },
+    });
+
+    if (isFollowing) {
+      return true;
+    }
+    return false;
+  } catch (err) {
+    console.log(err);
+    throw new Error(
+      "Failed to perform isCurrentUserFollowingProfileUser function.",
+    );
+  }
+}
