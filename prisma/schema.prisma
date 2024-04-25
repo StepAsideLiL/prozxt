@@ -24,6 +24,9 @@ model User {
   portfolio      Portfolio?
   posts          Post[]
   projects       Project[]
+
+  followers  Follow[] @relation("followers")
+  followings Follow[] @relation("followings")
 }
 
 model Session {
@@ -98,4 +101,14 @@ model Project {
 
   userId String
   user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model Follow {
+  followerId String
+  followers  User   @relation("followers", references: [id], fields: [followerId])
+
+  followingId String
+  followings  User   @relation("followings", references: [id], fields: [followingId])
+
+  @@id([followerId, followingId])
 }
