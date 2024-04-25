@@ -1,4 +1,4 @@
-import { NoUserHeader } from "@/components/prozxt-ui/headers";
+import { NoUserHeader, ProfileHeader } from "@/components/prozxt-ui/headers";
 import { isUserExist } from "@/lib/data/user";
 import { RiUserForbidFill } from "react-icons/ri";
 
@@ -26,5 +26,11 @@ export default async function Layout({
     );
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <ProfileHeader username={params.username} />
+
+      {children}
+    </>
+  );
 }
