@@ -19,7 +19,6 @@ model User {
   hashed_password String
 
   sessions       Session[]
-  profile        Profile?
   card           Card?
   profilePicture Image?
   portfolio      Portfolio?
@@ -32,15 +31,6 @@ model Session {
   userId    String
   expiresAt DateTime
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
-}
-
-model Profile {
-  id String @id @unique @default(cuid())
-
-  name String @default("")
-
-  userId String @unique
-  user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
 model Image {
