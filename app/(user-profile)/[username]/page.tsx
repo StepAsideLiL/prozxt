@@ -1,5 +1,3 @@
-import { validateRequest } from "@/lib/auth";
-import { getUserByUsername } from "@/lib/data/user";
 import UserProfileOverview from "./_parts/user-profile-overview";
 import { Suspense } from "react";
 import UserActivities from "./_parts/user-activities";
@@ -9,9 +7,6 @@ export default async function Page({
 }: {
   params: { username: string };
 }) {
-  const userInfo = await getUserByUsername(params.username);
-  const { user } = await validateRequest();
-
   return (
     <main className="container space-y-10 py-3">
       <Suspense fallback={<UserProfileOverviewSkeleton />}>
@@ -19,7 +14,7 @@ export default async function Page({
       </Suspense>
 
       <Suspense fallback={<UserActivitiesSkeleton />}>
-        <UserActivities />
+        <UserActivities username={params.username} />
       </Suspense>
     </main>
   );
