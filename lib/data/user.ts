@@ -168,3 +168,31 @@ export async function isCurrentUserFollowingProfileUser(
     );
   }
 }
+
+export async function getUserActivities(username: string) {
+  try {
+    const postCount = prisma.post.count({
+      where: {
+        user: {
+          username: username,
+        },
+      },
+    });
+    const projectCount = prisma.project.count({
+      where: {
+        user: {
+          username: username,
+        },
+      },
+    });
+
+    const data = await Promise.all([
+      { title: "Posts", href: `/${username}/posts`, count: postCount },
+      { title: "Projects", href: `/${username}/projects`, count: projectCount },
+    ]);
+    return data;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to perform getUserActivities function.");
+  }
+}
