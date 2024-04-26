@@ -4,7 +4,7 @@ import LexicalEditor from "@/components/lexical-rte/lexical-editor";
 import { NewPostInput } from "@/components/prozxt-ui/input";
 import { Button } from "@/components/ui/button";
 import { EditorState } from "lexical";
-import { Plus, RotateCw, Save } from "lucide-react";
+import { RotateCw, Save } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { updatePost } from "./actions";
