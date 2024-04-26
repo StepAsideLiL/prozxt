@@ -14,7 +14,7 @@ export default async function Page({
 
   return (
     <main className="container space-y-10 py-3">
-      <Suspense>
+      <Suspense fallback={<UserProfileOverviewSkeleton />}>
         <UserProfileOverview username={params.username} />
       </Suspense>
 
@@ -30,5 +30,13 @@ export default async function Page({
       )}
       {user && <Logout />}
     </main>
+  );
+}
+
+function UserProfileOverviewSkeleton() {
+  return (
+    <section className="mx-auto flex max-w-3xl gap-5 space-y-3">
+      loading
+    </section>
   );
 }
