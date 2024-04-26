@@ -1,4 +1,3 @@
-import Logout from "@/components/prozxt-ui/logout";
 import { validateRequest } from "@/lib/auth";
 import { getUserByUsername } from "@/lib/data/user";
 import UserProfileOverview from "./_parts/user-profile-overview";
@@ -17,18 +16,6 @@ export default async function Page({
       <Suspense fallback={<UserProfileOverviewSkeleton />}>
         <UserProfileOverview username={params.username} />
       </Suspense>
-
-      {userInfo ? (
-        <h1>{userInfo.username}</h1>
-      ) : (
-        <p className="text-muted-foreground">No User</p>
-      )}
-      {user?.username === userInfo?.username ? (
-        <h1>same</h1>
-      ) : (
-        <p className="text-muted-foreground">Not same</p>
-      )}
-      {user && <Logout />}
     </main>
   );
 }
