@@ -92,3 +92,69 @@ export async function pinProjectByUserIdAndProjectId(
     throw new Error("Failed to perform pinProjectByUserIdAndProjectId");
   }
 }
+
+export async function getUserPinsByUsername(username: string) {
+  try {
+    const pins = await prisma.user.findUnique({
+      where: {
+        username: username,
+      },
+      select: {
+        profile: {
+          select: {
+            pinPost: {
+              select: {
+                id: true,
+                title: true,
+                body: true,
+                createdAt: true,
+                updatedAt: true,
+                user: {
+                  select: {
+                    id: true,
+                    username: true,
+                    profilePicture: {
+                      select: {
+                        width: true,
+                        height: true,
+                        url: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            pinProject: {
+              select: {
+                id: true,
+                title: true,
+                body: true,
+                tags: true,
+                createdAt: true,
+                updatedAt: true,
+                user: {
+                  select: {
+                    id: true,
+                    username: true,
+                    profilePicture: {
+                      select: {
+                        width: true,
+                        height: true,
+                        url: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return pins;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to perform getUserPinsByUsername.");
+  }
+}
