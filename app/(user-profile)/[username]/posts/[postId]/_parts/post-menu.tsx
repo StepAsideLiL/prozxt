@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { deletePostById } from "@/lib/data/post";
+import { pinPostByUserIdAndPostId } from "@/lib/data/profile";
 import { Edit, EllipsisVertical, Pin } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -16,14 +17,24 @@ import { toast } from "sonner";
 
 export default function PostMenu({
   username,
+  userId,
   postId,
 }: {
   username: string;
+  userId: string;
   postId: string;
 }) {
   const router = useRouter();
 
-  function handlePinPost() {}
+  async function handlePinPost() {
+    const res = await pinPostByUserIdAndPostId(userId, postId);
+
+    if (res.success) {
+      toast.success(res.message);
+    } else {
+      toast.error(res.message);
+    }
+  }
 
   async function handleDeletePost() {
     const res = await deletePostById(postId);

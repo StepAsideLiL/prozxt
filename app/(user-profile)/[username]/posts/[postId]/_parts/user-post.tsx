@@ -22,7 +22,11 @@ export default async function UserPost({
         <section className="space-y-6">
           {user?.username === username && (
             <>
-              <PostMenu username={user.username} postId={post!.id} />
+              <PostMenu
+                username={user.username}
+                userId={user.id}
+                postId={post!.id}
+              />
             </>
           )}
 
