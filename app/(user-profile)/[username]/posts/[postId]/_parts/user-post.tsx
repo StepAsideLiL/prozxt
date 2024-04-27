@@ -18,46 +18,52 @@ export default async function UserPost({
   const post = await getPostById(postId);
 
   return (
-    <section className="mx-auto max-w-3xl space-y-6">
-      {user?.username === username && (
-        <>
-          <Button variant={"outline"} asChild>
-            <Link href={`/${username}/posts/${postId}/edit`} className="gap-1">
-              <Edit size={16} /> Edit
-            </Link>
-          </Button>
-        </>
-      )}
-
+    <section className="mx-auto max-w-3xl">
       {post ? (
-        <article className="space-y-4">
-          <h1 className="text-4xl font-bold">{post.title}</h1>
-
-          <section className="flex items-start gap-5">
-            <Link href={`/${post.user.username}`}>
-              <Avatar>
-                <AvatarImage src={post.user.profilePicture?.url} />
-                <AvatarFallback>
-                  {post.user.username[0].toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
-            </Link>
-
-            <div>
-              <h1>
-                <Link href={`/${post.user.username}`}>
-                  {post.user.username}
+        <section className="space-y-6">
+          {user?.username === username && (
+            <>
+              {/* <PostMenu postId={post!.id} /> */}
+              <Button variant={"outline"} asChild>
+                <Link
+                  href={`/${username}/posts/${postId}/edit`}
+                  className="gap-1"
+                >
+                  <Edit size={16} /> Edit
                 </Link>
-              </h1>
-              <p className="text-xs text-muted-foreground">
-                {format(new Date(post.createdAt), `dd MMMM yyyy`)} (Posted{" "}
-                {formatDistanceToNow(new Date(post.createdAt))} ago)
-              </p>
-            </div>
-          </section>
+              </Button>
+            </>
+          )}
 
-          <LexicalReadonly content={post.body} />
-        </article>
+          <article className="space-y-4">
+            <h1 className="text-4xl font-bold">{post.title}</h1>
+
+            <section className="flex items-start gap-5">
+              <Link href={`/${post.user.username}`}>
+                <Avatar>
+                  <AvatarImage src={post.user.profilePicture?.url} />
+                  <AvatarFallback>
+                    {post.user.username[0].toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+              </Link>
+
+              <div>
+                <h1>
+                  <Link href={`/${post.user.username}`}>
+                    {post.user.username}
+                  </Link>
+                </h1>
+                <p className="text-xs text-muted-foreground">
+                  {format(new Date(post.createdAt), `dd MMMM yyyy`)} (Posted{" "}
+                  {formatDistanceToNow(new Date(post.createdAt))} ago)
+                </p>
+              </div>
+            </section>
+
+            <LexicalReadonly content={post.body} />
+          </article>
+        </section>
       ) : (
         <>
           <h1 className="text-center text-2xl text-muted-foreground">
