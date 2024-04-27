@@ -32,7 +32,7 @@ export default function ProjectMenu({
     if (res.success) {
       toast.success(res.message);
       router.replace(`/${username}/projects`);
-      revalidatePath(`/${username}/projects`);
+      router.refresh();
     } else {
       toast.error(res.message);
     }

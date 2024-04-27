@@ -32,9 +32,9 @@ export default function PostMenu({
     if (res.success) {
       toast.success(res.message);
       router.replace(`/${username}/posts`);
+      router.refresh();
     } else {
       toast.error(res.message);
-      revalidatePath(`/${username}/posts`);
     }
   }
 
