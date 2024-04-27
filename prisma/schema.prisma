@@ -24,6 +24,7 @@ model User {
   portfolio      Portfolio?
   posts          Post[]
   projects       Project[]
+  profile        Profile?
 
   followers  Follow[] @relation("followers")
   followings Follow[] @relation("followings")
@@ -85,6 +86,8 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  pinPostFor Profile?
+
   userId String
   user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
@@ -99,6 +102,8 @@ model Project {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  pinPostFor Profile?
+
   userId String
   user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
@@ -111,4 +116,20 @@ model Follow {
   followings  User   @relation("followings", references: [id], fields: [followingId])
 
   @@id([followerId, followingId])
+}
+
+model Profile {
+  id String @id @unique @default(cuid())
+
+  name   String?
+  status String?
+
+  pinPostId String? @unique
+  pinPost   Post?   @relation(references: [id], fields: [pinPostId])
+
+  pinProjectId String?  @unique
+  pinProject   Project? @relation(references: [id], fields: [pinProjectId])
+
+  userId String @unique
+  user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
