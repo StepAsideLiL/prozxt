@@ -75,3 +75,28 @@ export async function getProjctById(projectId: string) {
     throw new Error("Failed to to fetch project.");
   }
 }
+
+export async function deleteProjectById(projectId: string) {
+  try {
+    const post = await prisma.project.delete({
+      where: {
+        id: projectId,
+      },
+    });
+
+    if (post) {
+      return {
+        success: true,
+        message: "Successfully deleted!",
+      };
+    } else {
+      return {
+        success: false,
+        message: "Failed to delete!",
+      };
+    }
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to perform deleteProjectById function.");
+  }
+}

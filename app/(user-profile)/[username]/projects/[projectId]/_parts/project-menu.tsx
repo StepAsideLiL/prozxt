@@ -8,8 +8,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deleteProjectById } from "@/lib/data/project";
 import { Edit, EllipsisVertical, Pin } from "lucide-react";
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function ProjectMenu({
   username,
@@ -18,9 +22,21 @@ export default function ProjectMenu({
   username: string;
   projectId: string;
 }) {
+  const router = useRouter();
+
   function handlePinProject() {}
 
-  function handleDeleteProject() {}
+  async function handleDeleteProject() {
+    const res = await deleteProjectById(projectId);
+
+    if (res.success) {
+      toast.success(res.message);
+      router.replace(`/${username}/projects`);
+      revalidatePath(`/${username}/projects`);
+    } else {
+      toast.error(res.message);
+    }
+  }
 
   return (
     <DropdownMenu>
