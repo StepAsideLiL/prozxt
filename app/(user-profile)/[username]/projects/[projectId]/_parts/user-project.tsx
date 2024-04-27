@@ -23,7 +23,11 @@ export default async function UserProject({
           <section className="space-y-6">
             {user?.username === username && (
               <>
-                <ProjectMenu username={user.username} projectId={project.id} />
+                <ProjectMenu
+                  username={user.username}
+                  userId={user.id}
+                  projectId={project.id}
+                />
               </>
             )}
 
