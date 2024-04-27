@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { deletePostById } from "@/lib/data/post";
 import { Edit, EllipsisVertical, Pin } from "lucide-react";
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
