@@ -4,8 +4,6 @@ import { getProjctById } from "@/lib/data/project";
 import Link from "next/link";
 import { format, formatDistanceToNow } from "date-fns";
 import { validateRequest } from "@/lib/auth";
-import { Button } from "@/components/ui/button";
-import { Edit } from "lucide-react";
 import ProjectMenu from "./project-menu";
 
 export default async function UserProject({

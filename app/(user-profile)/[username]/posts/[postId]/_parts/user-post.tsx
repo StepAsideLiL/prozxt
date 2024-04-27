@@ -4,8 +4,6 @@ import { getPostById } from "@/lib/data/post";
 import Link from "next/link";
 import { format, formatDistanceToNow } from "date-fns";
 import { validateRequest } from "@/lib/auth";
-import { Button } from "@/components/ui/button";
-import { Edit } from "lucide-react";
 import PostMenu from "./post-menu";
 
 export default async function UserPost({
