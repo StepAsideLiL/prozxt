@@ -8,8 +8,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deletePostById } from "@/lib/data/post";
 import { Edit, EllipsisVertical, Pin } from "lucide-react";
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function PostMenu({
   username,
@@ -18,9 +22,21 @@ export default function PostMenu({
   username: string;
   postId: string;
 }) {
+  const router = useRouter();
+
   function handlePinPost() {}
 
-  function handleDeletePost() {}
+  async function handleDeletePost() {
+    const res = await deletePostById(postId);
+
+    if (res.success) {
+      toast.success(res.message);
+      router.replace(`/${username}/posts`);
+    } else {
+      toast.error(res.message);
+      revalidatePath(`/${username}/posts`);
+    }
+  }
 
   return (
     <DropdownMenu>

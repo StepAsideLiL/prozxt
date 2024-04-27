@@ -73,3 +73,28 @@ export async function getPostById(postId: string) {
     throw new Error("Failed to fetch post.");
   }
 }
+
+export async function deletePostById(postId: string) {
+  try {
+    const post = await prisma.post.delete({
+      where: {
+        id: postId,
+      },
+    });
+
+    if (post) {
+      return {
+        success: true,
+        message: "Successfully deleted!",
+      };
+    } else {
+      return {
+        success: false,
+        message: "Failed to delete!",
+      };
+    }
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to perform deletePost function.");
+  }
+}
