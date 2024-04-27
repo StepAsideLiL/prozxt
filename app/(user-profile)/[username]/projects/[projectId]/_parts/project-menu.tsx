@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { pinProjectByUserIdAndProjectId } from "@/lib/data/profile";
 import { deleteProjectById } from "@/lib/data/project";
 import { Edit, EllipsisVertical, Pin } from "lucide-react";
 import Link from "next/link";
@@ -16,14 +17,24 @@ import { toast } from "sonner";
 
 export default function ProjectMenu({
   username,
+  userId,
   projectId,
 }: {
   username: string;
+  userId: string;
   projectId: string;
 }) {
   const router = useRouter();
 
-  function handlePinProject() {}
+  async function handlePinProject() {
+    const res = await pinProjectByUserIdAndProjectId(userId, projectId);
+
+    if (res.success) {
+      toast.success(res.message);
+    } else {
+      toast.error(res.message);
+    }
+  }
 
   async function handleDeleteProject() {
     const res = await deleteProjectById(projectId);
