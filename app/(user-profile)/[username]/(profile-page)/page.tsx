@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import UserActivities from "./_parts/user-activities";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import UserPins from "./_parts/user-pins";
 
 export default async function Page({
   params,
@@ -17,6 +18,10 @@ export default async function Page({
 
       <Suspense fallback={<UserActivitiesSkeleton />}>
         <UserActivities username={params.username} />
+      </Suspense>
+
+      <Suspense fallback={<UserPinsSkeleton />}>
+        <UserPins username={params.username} />
       </Suspense>
     </main>
   );
@@ -52,4 +57,8 @@ function UserActivitiesSkeleton() {
       ))}
     </section>
   );
+}
+
+function UserPinsSkeleton() {
+  return <section className="mx-auto flex max-w-3xl gap-5">loading</section>;
 }
