@@ -6,6 +6,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import { validateRequest } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Edit } from "lucide-react";
+import PostMenu from "./post-menu";
 
 export default async function UserPost({
   username,
@@ -23,15 +24,7 @@ export default async function UserPost({
         <section className="space-y-6">
           {user?.username === username && (
             <>
-              {/* <PostMenu postId={post!.id} /> */}
-              <Button variant={"outline"} asChild>
-                <Link
-                  href={`/${username}/posts/${postId}/edit`}
-                  className="gap-1"
-                >
-                  <Edit size={16} /> Edit
-                </Link>
-              </Button>
+              <PostMenu username={user.username} postId={post!.id} />
             </>
           )}
 
