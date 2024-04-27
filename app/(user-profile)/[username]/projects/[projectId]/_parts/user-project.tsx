@@ -6,6 +6,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import { validateRequest } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Edit } from "lucide-react";
+import ProjectMenu from "./project-menu";
 
 export default async function UserProject({
   username,
@@ -24,14 +25,7 @@ export default async function UserProject({
           <section className="space-y-6">
             {user?.username === username && (
               <>
-                <Button variant={"outline"} asChild>
-                  <Link
-                    href={`/${username}/projects/${projectId}/edit`}
-                    className="gap-1"
-                  >
-                    <Edit size={16} /> Edit
-                  </Link>
-                </Button>
+                <ProjectMenu username={user.username} projectId={project.id} />
               </>
             )}
 
