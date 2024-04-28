@@ -116,7 +116,7 @@ export default async function UserPins({ username }: { username: string }) {
               <div>
                 <h1 className="text-2xl font-semibold">
                   <Link
-                    href={`/${userPins.profile.pinProject.user.username}/posts/${userPins.profile.pinProject.id}`}
+                    href={`/${userPins.profile.pinProject.user.username}/projects/${userPins.profile.pinProject.id}`}
                     className="hover:underline"
                   >
                     {userPins.profile.pinProject.title}
