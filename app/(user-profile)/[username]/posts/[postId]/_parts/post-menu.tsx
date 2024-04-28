@@ -10,16 +10,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { deletePostById } from "@/lib/data/post";
 import { pinPostByUserIdAndPostId } from "@/lib/data/profile";
-import { Edit, EllipsisVertical, Pin } from "lucide-react";
+import { Edit, EllipsisVertical, Pin, PinOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export default function PostMenu({
+  pinned,
   username,
   userId,
   postId,
 }: {
+  pinned: boolean;
   username: string;
   userId: string;
   postId: string;
@@ -35,6 +37,8 @@ export default function PostMenu({
       toast.error(res.message);
     }
   }
+
+  async function handleUnpinPost() {}
 
   async function handleDeletePost() {
     const res = await deletePostById(postId);
@@ -58,9 +62,17 @@ export default function PostMenu({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        <DropdownMenuItem className="gap-2" onClick={handlePinPost}>
-          <Pin size={16} /> Pin Post to Profile
-        </DropdownMenuItem>
+        {!pinned && (
+          <DropdownMenuItem className="gap-2" onClick={handlePinPost}>
+            <Pin size={16} /> Pin Post to Profile
+          </DropdownMenuItem>
+        )}
+
+        {pinned && (
+          <DropdownMenuItem className="gap-2" onClick={handleUnpinPost}>
+            <PinOff size={16} /> Unpin Post
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuItem className="gap-2" asChild>
           <Link href={`/${username}/posts/${postId}/edit`}>
