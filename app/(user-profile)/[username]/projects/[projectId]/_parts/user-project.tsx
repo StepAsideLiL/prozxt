@@ -24,6 +24,7 @@ export default async function UserProject({
             {user?.username === username && (
               <>
                 <ProjectMenu
+                  pinned={project.pinProjectFor ? true : false}
                   username={user.username}
                   userId={user.id}
                   projectId={project.id}
