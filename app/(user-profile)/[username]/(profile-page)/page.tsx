@@ -60,5 +60,11 @@ function UserActivitiesSkeleton() {
 }
 
 function UserPinsSkeleton() {
-  return <section className="mx-auto flex max-w-3xl gap-5">loading</section>;
+  return (
+    <section className="mx-auto max-w-3xl space-y-8">
+      <Skeleton className="h-20 w-full" />
+
+      <Skeleton className="h-20 w-full" />
+    </section>
+  );
 }
