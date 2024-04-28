@@ -102,7 +102,7 @@ model Project {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  pinPostFor Profile?
+  pinProjectFor Profile?
 
   userId String
   user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
