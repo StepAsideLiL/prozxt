@@ -10,16 +10,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { pinProjectByUserIdAndProjectId } from "@/lib/data/profile";
 import { deleteProjectById } from "@/lib/data/project";
-import { Edit, EllipsisVertical, Pin } from "lucide-react";
+import { Edit, EllipsisVertical, Pin, PinOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export default function ProjectMenu({
+  pinned,
   username,
   userId,
   projectId,
 }: {
+  pinned: boolean;
   username: string;
   userId: string;
   projectId: string;
@@ -35,6 +37,8 @@ export default function ProjectMenu({
       toast.error(res.message);
     }
   }
+
+  async function handleUnpinProject() {}
 
   async function handleDeleteProject() {
     const res = await deleteProjectById(projectId);
@@ -58,9 +62,17 @@ export default function ProjectMenu({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        <DropdownMenuItem className="gap-2" onClick={handlePinProject}>
-          <Pin size={16} /> Pin Project to Profile
-        </DropdownMenuItem>
+        {!pinned && (
+          <DropdownMenuItem className="gap-2" onClick={handlePinProject}>
+            <Pin size={16} /> Pin Project to Profile
+          </DropdownMenuItem>
+        )}
+
+        {pinned && (
+          <DropdownMenuItem className="gap-2" onClick={handleUnpinProject}>
+            <PinOff size={16} /> Unpin Project
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuItem className="gap-2" asChild>
           <Link href={`/${username}/posts/${projectId}/edit`}>
