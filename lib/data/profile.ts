@@ -158,3 +158,38 @@ export async function getUserPinsByUsername(username: string) {
     throw new Error("Failed to perform getUserPinsByUsername.");
   }
 }
+
+export async function unpinPostByUserIdAndPostId(
+  userId: string,
+  postId: string,
+) {
+  try {
+    const unpin = await prisma.profile.update({
+      where: {
+        userId: userId,
+      },
+      data: {
+        pinPost: {
+          disconnect: {
+            id: postId,
+          },
+        },
+      },
+    });
+
+    if (unpin) {
+      return {
+        success: true,
+        message: "Successfully unpinned!",
+      };
+    } else {
+      return {
+        success: false,
+        message: "Failed to unpin!",
+      };
+    }
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to perform unpinPostByUserIdAndPostId.");
+  }
+}
