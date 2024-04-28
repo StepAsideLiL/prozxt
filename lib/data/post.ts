@@ -64,6 +64,7 @@ export async function getPostById(postId: string) {
             },
           },
         },
+        pinPostFor: true,
       },
     });
 
