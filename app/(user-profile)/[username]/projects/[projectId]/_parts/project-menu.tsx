@@ -76,18 +76,24 @@ export default function ProjectMenu({
 
       <DropdownMenuContent>
         {!pinned && (
-          <DropdownMenuItem className="gap-2" onClick={handlePinProject}>
+          <DropdownMenuItem
+            className="cursor-pointer gap-2"
+            onClick={handlePinProject}
+          >
             <Pin size={16} /> Pin Project to Profile
           </DropdownMenuItem>
         )}
 
         {pinned && (
-          <DropdownMenuItem className="gap-2" onClick={handleUnpinProject}>
+          <DropdownMenuItem
+            className="cursor-pointer gap-2"
+            onClick={handleUnpinProject}
+          >
             <PinOff size={16} /> Unpin Project
           </DropdownMenuItem>
         )}
 
-        <DropdownMenuItem className="gap-2" asChild>
+        <DropdownMenuItem className="cursor-pointer gap-2" asChild>
           <Link href={`/${username}/posts/${projectId}/edit`}>
             <Edit size={16} /> Edit
           </Link>
@@ -95,7 +101,10 @@ export default function ProjectMenu({
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className="gap-2" onClick={handleDeleteProject}>
+        <DropdownMenuItem
+          className="cursor-pointer gap-2"
+          onClick={handleDeleteProject}
+        >
           <Edit size={16} /> Delete
         </DropdownMenuItem>
       </DropdownMenuContent>

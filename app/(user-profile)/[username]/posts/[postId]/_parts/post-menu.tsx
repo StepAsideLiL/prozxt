@@ -76,18 +76,24 @@ export default function PostMenu({
 
       <DropdownMenuContent>
         {!pinned && (
-          <DropdownMenuItem className="gap-2" onClick={handlePinPost}>
+          <DropdownMenuItem
+            className="cursor-pointer gap-2"
+            onClick={handlePinPost}
+          >
             <Pin size={16} /> Pin Post to Profile
           </DropdownMenuItem>
         )}
 
         {pinned && (
-          <DropdownMenuItem className="gap-2" onClick={handleUnpinPost}>
+          <DropdownMenuItem
+            className="cursor-pointer gap-2"
+            onClick={handleUnpinPost}
+          >
             <PinOff size={16} /> Unpin Post
           </DropdownMenuItem>
         )}
 
-        <DropdownMenuItem className="gap-2" asChild>
+        <DropdownMenuItem className="cursor-pointer gap-2" asChild>
           <Link href={`/${username}/posts/${postId}/edit`}>
             <Edit size={16} /> Edit
           </Link>
@@ -95,7 +101,10 @@ export default function PostMenu({
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className="gap-2" onClick={handleDeletePost}>
+        <DropdownMenuItem
+          className="cursor-pointer gap-2"
+          onClick={handleDeletePost}
+        >
           <Edit size={16} /> Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
