@@ -9,7 +9,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { deletePostById } from "@/lib/data/post";
-import { pinPostByUserIdAndPostId } from "@/lib/data/profile";
+import {
+  pinPostByUserIdAndPostId,
+  unpinPostByUserIdAndPostId,
+} from "@/lib/data/profile";
 import { Edit, EllipsisVertical, Pin, PinOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,12 +36,22 @@ export default function PostMenu({
 
     if (res.success) {
       toast.success(res.message);
+      router.refresh();
     } else {
       toast.error(res.message);
     }
   }
 
-  async function handleUnpinPost() {}
+  async function handleUnpinPost() {
+    const res = await unpinPostByUserIdAndPostId(userId, postId);
+
+    if (res.success) {
+      toast.success(res.message);
+      router.refresh();
+    } else {
+      toast.error(res.message);
+    }
+  }
 
   async function handleDeletePost() {
     const res = await deletePostById(postId);
