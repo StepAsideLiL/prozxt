@@ -23,6 +23,7 @@ export default async function UserPost({
           {user?.username === username && (
             <>
               <PostMenu
+                pinned={post.pinPostFor ? true : false}
                 username={user.username}
                 userId={user.id}
                 postId={post!.id}
