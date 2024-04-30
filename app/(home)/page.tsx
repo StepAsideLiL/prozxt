@@ -1,14 +1,16 @@
-import { besley, monofett, rubikMonoOne, vt323 } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
+import { Suspense } from "react";
+import Posts from "./_parts/posts";
 
 export default function Page() {
   return (
-    <main className="grid place-content-center py-10">
-      <h1 className={cn("text-3xl", monofett.className)}>Hello, World</h1>
-      <h1 className={cn("text-3xl", vt323.className)}>Hello, World</h1>
-      <h1 className={cn("text-3xl", rubikMonoOne.className)}>Hello, World</h1>
-      <h1 className={cn("text-3xl", besley.className)}>Hello, World</h1>
-      <h1 className={cn("text-3xl")}>Hello, World</h1>
+    <main className="container py-3">
+      <Suspense fallback={<PostsSkeleton />}>
+        <Posts />
+      </Suspense>
     </main>
   );
+}
+
+function PostsSkeleton() {
+  return <section className="mx-auto max-w-3xl space-y-3">loading</section>;
 }
