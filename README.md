@@ -10,7 +10,7 @@ Most of the service that helps developers and designers to create a portfolio ha
 
 You can visit **[Prozxt form here](https://prozxt.vercel.app/)**
 
-To run the project on your local machine, see Contribute section.
+To run the project on your local machine, see Start The Project section.
 
 ## Technologies
 
@@ -30,7 +30,7 @@ Prozxt made with these following technologies:
 3. Create post for about relevant topics.
 4. Support projects.
 
-## Contribute
+## Start The Project
 
 To run the project on your local machine you need [git](https://git-scm.com/downloads), [nodejs](https://nodejs.org/en/download), [pnpm](https://pnpm.io/installation), and [cockroachDB](https://www.cockroachlabs.com/) or [cockroachDB binary](https://www.cockroachlabs.com/docs/releases/). make sure you have these installed in your system.
 
@@ -67,5 +67,3 @@ pnpm run dev
 ```
 
 ### If you find any bugs, please make an issue.
-
-### If you want to contribute, please reach out to me. I will be happy to have you on my journey.
