@@ -1,10 +1,10 @@
 # [Prozxt](https://prozxt.vercel.app/)
 
-Build your portfolio and documentation your important projects. Prozxt provides with a markdown editor so that you can design your portfolio with ease. (Block Editor coming soon)
+Build your portfolio and document your important projects. Prozxt provides with a markdown editor so that you can design your portfolio with ease. (Block Editor coming soon)
 
 ## Why Use Prozxt
 
-Most of the service that helps developers and designers to create a portfolio has a common problem. They do not provide any support to organize their portfolio and projects. Prozxt solves this problem by providing the developer and designer with a platform that only facilitates a portfolio and projects. The developer and designer can now easily showcase their portfolio and projects without worrying about messing their other profiles.
+Most of the service that helps developers and designers to create a portfolio has a common problem. They do not provide any support to organize their portfolio and projects. Prozxt solves this problem by providing the developer and designer with a platform that only facilitates a portfolio and projects. The developer and designer can now easily showcase their portfolio and projects without worrying about messing up their other profiles.
 
 ## Quick Start
 
