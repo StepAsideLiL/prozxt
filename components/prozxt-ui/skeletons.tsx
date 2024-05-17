@@ -96,3 +96,7 @@ export function UserProfileAvatarSkeleton() {
     </div>
   );
 }
+
+export function PostProjectSkeleton() {
+  return <Skeleton className="h-40 w-full" />;
+}
