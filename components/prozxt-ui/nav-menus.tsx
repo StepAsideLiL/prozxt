@@ -17,6 +17,8 @@ import {
   TbSettings,
   TbSettingsPlus,
 } from "react-icons/tb";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export function UserProfileSidebar({
   children,
@@ -111,5 +113,40 @@ export function UserProfileSidebar({
         </section>
       </SheetContent>
     </Sheet>
+  );
+}
+
+export function HomeNav() {
+  const menus = [
+    {
+      title: "Post",
+      href: "/post",
+    },
+    {
+      title: "Project",
+      href: "/project",
+    },
+  ];
+
+  const pathname = usePathname();
+
+  return (
+    <nav>
+      <ul className="flex items-center gap-[2px] border p-[2px]">
+        {menus.map((menu) => (
+          <li key={menu.href}>
+            <Link
+              href={menu.href}
+              className={cn(
+                "inline-block px-4 py-2 hover:bg-muted/50",
+                menu.href === pathname && "bg-muted hover:bg-muted",
+              )}
+            >
+              {menu.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
