@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import ModeToggle from "@/components/prozxt-ui/mode-toggle";
 import { Logo } from "@/components/prozxt-ui/logo";
 import { getCurrentUser, getUserByUsername } from "@/lib/data/user";
-import { UserProfileSidebar } from "@/components/prozxt-ui/nav-menus";
+import { HomeNav, UserProfileSidebar } from "@/components/prozxt-ui/nav-menus";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   UserAvatarSkeleton,
@@ -18,10 +18,14 @@ export function HomeHeader() {
   return (
     <div className="border-b">
       <header className="container flex items-center justify-between py-3">
-        <div className="flex items-center gap-5">
-          <Logo size={24} variant="link" />
+        <div className="flex items-center gap-10">
+          <div className="flex items-center gap-5">
+            <Logo size={24} variant="link" />
 
-          <h1 className="font-semibold">Home</h1>
+            <h1 className="font-semibold">Home</h1>
+          </div>
+
+          <HomeNav />
         </div>
 
         <div className="flex items-center gap-5">
