@@ -101,3 +101,39 @@ export async function deleteProjectById(projectId: string) {
     throw new Error("Failed to perform deleteProjectById function.");
   }
 }
+
+export async function getHomeProjects() {
+  try {
+    const posts = await prisma.project.findMany({
+      take: 10,
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        id: true,
+        title: true,
+        body: true,
+        createdAt: true,
+        updatedAt: true,
+        user: {
+          select: {
+            id: true,
+            username: true,
+            profilePicture: {
+              select: {
+                width: true,
+                height: true,
+                url: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return posts;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to perform getHomeProjects.");
+  }
+}
