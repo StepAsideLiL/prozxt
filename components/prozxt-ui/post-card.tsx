@@ -7,13 +7,13 @@ export default function PostCard({
   profileUrl,
   postCreatedAt,
   postTitle,
-  userId,
+  postId,
 }: {
   username: string;
   profileUrl: string;
   postCreatedAt: Date;
   postTitle: string;
-  userId: string;
+  postId: string;
 }) {
   return (
     <article className="space-y-3 rounded bg-muted/25 p-5">
@@ -42,7 +42,7 @@ export default function PostCard({
         <div>
           <h1 className="text-2xl font-semibold">
             <Link
-              href={`/${username}/projects/${userId}`}
+              href={`/${username}/projects/${postId}`}
               className="hover:underline"
             >
               {postTitle}
