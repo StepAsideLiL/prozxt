@@ -98,5 +98,13 @@ export function UserProfileAvatarSkeleton() {
 }
 
 export function PostProjectSkeleton() {
-  return <Skeleton className="h-40 w-full" />;
+  const arr = Array.from({ length: 5 }).map((_, i) => i + 1);
+
+  return (
+    <section className="mx-auto max-w-3xl space-y-3">
+      {arr.map((i) => (
+        <Skeleton key={i} className="h-32 w-full" />
+      ))}
+    </section>
+  );
 }
