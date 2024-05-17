@@ -56,11 +56,11 @@ export default async function Posts() {
           ))}
         </>
       ) : (
-        <>
+        <div className="flex flex-col items-center justify-center gap-2 py-20">
           <h1 className="text-center text-2xl text-muted-foreground">
             No Post Found
           </h1>
-        </>
+        </div>
       )}
     </section>
   );
