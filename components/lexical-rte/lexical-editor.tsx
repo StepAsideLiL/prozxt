@@ -4,9 +4,9 @@ import {
   InitialConfigType,
   LexicalComposer,
 } from "@lexical/react/LexicalComposer";
-import { theme } from "./theme";
+import { theme } from "./config/theme";
 import Editor from "./editor";
-import { Nodes } from "./nodes";
+import { Nodes } from "./config/nodes";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { EditorState } from "lexical";
 

@@ -4,8 +4,8 @@ import {
   InitialConfigType,
   LexicalComposer,
 } from "@lexical/react/LexicalComposer";
-import { theme } from "./theme";
-import { Nodes } from "./nodes";
+import { theme } from "./config/theme";
+import { Nodes } from "./config/nodes";
 import Editor from "./editor";
 
 export default function LexicalReadonly({ content }: { content?: string }) {
