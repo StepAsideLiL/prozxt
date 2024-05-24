@@ -78,7 +78,7 @@ export default function ImgbbUploadForm({
   }
 
   return (
-    <div>
+    <section className="mx-auto max-w-3xl space-y-3">
       <form onSubmit={handleSubmit} className="space-y-2">
         <Label htmlFor="profile">
           <div className="size-40 overflow-hidden rounded-full">
@@ -128,6 +128,6 @@ export default function ImgbbUploadForm({
           </Button>
         )}
       </form>
-    </div>
+    </section>
   );
 }
