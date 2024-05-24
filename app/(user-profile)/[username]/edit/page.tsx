@@ -2,6 +2,8 @@ import ImgbbUploadForm from "./_parts/imgbb-upload-form";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/data/user";
 import { validateRequest } from "@/lib/auth";
+import UserProfileInfoForm from "./_parts/user-profile-info-form";
+import { Separator } from "@/components/ui/separator";
 
 export default async function Page() {
   const { user } = await validateRequest();
@@ -18,8 +20,12 @@ export default async function Page() {
   };
 
   return (
-    <main className="grid min-h-screen place-content-center">
+    <main className="container space-y-10 py-3">
       <ImgbbUploadForm profilePicture={profilePicture} />
+
+      <Separator className="mx-auto max-w-3xl" />
+
+      <UserProfileInfoForm />
     </main>
   );
 }
