@@ -114,7 +114,7 @@ export default function ImgbbUploadForm({
             reader.readAsDataURL(file);
           }}
           placeholder="Upload Profile Picture"
-          className="sr-only"
+          className="sr-only w-fit"
         />
 
         {!loading ? (
