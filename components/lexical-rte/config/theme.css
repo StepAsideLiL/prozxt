@@ -204,7 +204,7 @@
   cursor: pointer;
 }
 .EditorTheme__tableAddRows:after {
-  background-image: url(./assets/plus.svg);
+  background-image: url(../assets/plus.svg);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
