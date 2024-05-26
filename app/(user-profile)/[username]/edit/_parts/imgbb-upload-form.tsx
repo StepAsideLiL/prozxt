@@ -7,7 +7,7 @@ import Image from "next/image";
 import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { modifyCurrentUserProfilePicture } from "./actions";
 import { ImgbbImageRes, ProfilePicturePreview } from "@/lib/types";
-import { RotateCw } from "lucide-react";
+import { RotateCw, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 export default function ImgbbUploadForm({
@@ -79,9 +79,9 @@ export default function ImgbbUploadForm({
 
   return (
     <section className="mx-auto max-w-3xl space-y-3">
-      <form onSubmit={handleSubmit} className="space-y-2">
+      <form onSubmit={handleSubmit} className="space-y-8">
         <Label htmlFor="profile">
-          <div className="size-40 overflow-hidden rounded-full">
+          <div className="relative size-40 cursor-pointer overflow-hidden rounded-full">
             <Image
               src={selectedImage?.url || "/profile-picture-placeholder.jpeg"}
               alt="alt"
@@ -89,6 +89,10 @@ export default function ImgbbUploadForm({
               height={200}
               className="h-full w-full object-cover"
             />
+
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity hover:opacity-100">
+              <Upload size={20} className="text-white" />
+            </div>
           </div>
         </Label>
 
