@@ -196,3 +196,36 @@ export async function getUserActivities(username: string) {
     throw new Error("Failed to perform getUserActivities function.");
   }
 }
+
+export async function getUserProfileEditFormData(userId: string) {
+  try {
+    const profile = await prisma.profile.findUnique({
+      where: {
+        userId: userId,
+      },
+      include: {
+        user: {
+          include: {
+            profilePicture: true,
+          },
+        },
+      },
+    });
+
+    if (profile) {
+      return {
+        name: profile.name,
+        showProfessionalStatus: profile.showProfessionalStatus,
+        professionalStatus: profile.professionalStatus,
+        profilePictureName: profile.user.profilePicture?.title,
+        profilePictureMime: profile.user.profilePicture?.mime,
+        profilePictureUrl: profile.user.profilePicture?.url,
+      };
+    }
+
+    return null;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to perform getUserProfileEditFormData function.");
+  }
+}
