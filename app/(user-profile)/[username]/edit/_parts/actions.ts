@@ -2,7 +2,7 @@
 
 import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prismadb";
-import { ImgbbFormData } from "@/lib/types";
+import { EditUserProfileInfoData, ImgbbFormData } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 
 export async function modifyCurrentUserProfilePicture(data: ImgbbFormData) {
@@ -72,5 +72,49 @@ export async function modifyCurrentUserProfilePicture(data: ImgbbFormData) {
   } catch (err) {
     console.log(err);
     throw new Error("Failed to save current user profile picture");
+  }
+}
+
+export async function editUserProfileInfo(data: EditUserProfileInfoData) {
+  const { userId, username, name, professionalStatus, showProfessionalStatus } =
+    data;
+
+  try {
+    const userProfile = await prisma.profile.upsert({
+      where: {
+        userId: userId,
+      },
+      create: {
+        name: name,
+        professionalStatus: professionalStatus,
+        showProfessionalStatus: showProfessionalStatus,
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
+      update: {
+        name: name,
+        professionalStatus: professionalStatus,
+        showProfessionalStatus: showProfessionalStatus,
+      },
+    });
+
+    if (userProfile) {
+      revalidatePath(`/${username}/edit`);
+      return {
+        success: true,
+        message: "Your profile info is updated!",
+      };
+    }
+
+    return {
+      success: false,
+      message: "Failed to updated!",
+    };
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to perform editUserProfileInfo");
   }
 }
