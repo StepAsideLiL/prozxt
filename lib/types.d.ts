@@ -63,6 +63,7 @@ export type ImgbbFormData = {
 
 export type EditUserProfileInfoData = {
   userId: string;
+  username: string;
   name: string;
   showProfessionalStatus: boolean;
   professionalStatus: string;
