@@ -38,7 +38,13 @@ const formSchema = z.object({
 
 const professionalStatusList = ["Free to Work", "Available", "Hiring"];
 
-export default function UserProfileInfoForm({ userId }: { userId: string }) {
+export default function UserProfileInfoForm({
+  userId,
+  username,
+}: {
+  userId: string;
+  username: string;
+}) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
