@@ -29,7 +29,7 @@ const formSchema = z.object({
   name: z.string().min(1, {
     message: "name can not be empty.",
   }),
-  showProfessionalStatus: z.boolean().default(false).optional(),
+  showProfessionalStatus: z.boolean().default(false),
   professionalStatus: z.string().optional(),
 });
 
@@ -74,14 +74,14 @@ export default function UserProfileInfoForm() {
             name="professionalStatus"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Professional Status</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select your work status" />
+                      <SelectValue placeholder="Select your professional status" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -112,9 +112,11 @@ export default function UserProfileInfoForm() {
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>Show your work status on your profile.</FormLabel>
+                  <FormLabel>
+                    Show your professional status on your profile.
+                  </FormLabel>
                   <FormDescription>
-                    Let the hirers know about your work status.
+                    Let the hirers know about your professional status.
                   </FormDescription>
                 </div>
               </FormItem>
