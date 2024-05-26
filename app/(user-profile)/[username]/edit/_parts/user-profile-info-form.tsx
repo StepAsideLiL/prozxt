@@ -26,16 +26,19 @@ import { useState } from "react";
 import { RotateCcw } from "lucide-react";
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "name can not be empty.",
-  }).trim(),
+  name: z
+    .string()
+    .min(1, {
+      message: "name can not be empty.",
+    })
+    .trim(),
   showProfessionalStatus: z.boolean().default(false),
   professionalStatus: z.string().optional(),
 });
 
 const professionalStatusList = ["Free to Work", "Available", "Hiring"];
 
-export default function UserProfileInfoForm() {
+export default function UserProfileInfoForm({ userId }: { userId: string }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,6 +54,7 @@ export default function UserProfileInfoForm() {
     console.log(values);
 
     const formData = {
+      userId,
       name: values.name,
       showProfessionalStatus: values.showProfessionalStatus,
       professionalStatus: values.professionalStatus

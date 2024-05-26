@@ -25,7 +25,7 @@ export default async function Page() {
 
       <Separator className="mx-auto max-w-3xl" />
 
-      <UserProfileInfoForm />
+      <UserProfileInfoForm userId={user.id} />
     </main>
   );
 }
