@@ -1,22 +1,30 @@
 import ImgbbUploadForm from "./_parts/imgbb-upload-form";
 import { redirect } from "next/navigation";
-import { getCurrentUser } from "@/lib/data/user";
+import { getUserProfileEditFormData } from "@/lib/data/user";
 import { validateRequest } from "@/lib/auth";
 import UserProfileInfoForm from "./_parts/user-profile-info-form";
 import { Separator } from "@/components/ui/separator";
 
 export default async function Page() {
   const { user } = await validateRequest();
-  const currentUser = await getCurrentUser(user?.id);
 
   if (!user) {
     redirect("/auth/sign-in");
   }
+  const profile = await getUserProfileEditFormData(user.id);
 
   const profilePicture = {
-    name: currentUser?.profilePicture?.title || "",
-    mime: currentUser?.profilePicture?.mime || "",
-    url: currentUser?.profilePicture?.url || "",
+    name: profile?.profilePictureName || "",
+    mime: profile?.profilePictureMime || "",
+    url: profile?.profilePictureUrl || "",
+  };
+
+  const profileInfo = {
+    userId: user.id,
+    username: user.username,
+    name: profile?.name || "",
+    showProfessionalStatus: profile?.showProfessionalStatus || false,
+    professionalStatus: profile?.professionalStatus || "",
   };
 
   return (
@@ -25,7 +33,7 @@ export default async function Page() {
 
       <Separator className="mx-auto max-w-3xl" />
 
-      <UserProfileInfoForm userId={user.id} username={user.username} />
+      <UserProfileInfoForm profileInfo={profileInfo} />
     </main>
   );
 }
