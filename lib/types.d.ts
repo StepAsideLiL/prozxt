@@ -60,3 +60,9 @@ export type ImgbbFormData = {
   size: number;
   time: number;
 };
+
+export type EditUserProfileInfoData = {
+  name: string;
+  showProfessionalStatus: boolean;
+  professionalStatus: string;
+};
