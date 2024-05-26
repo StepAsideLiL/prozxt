@@ -24,6 +24,9 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 import { RotateCcw } from "lucide-react";
+import { toast } from "sonner";
+import { editUserProfileInfo } from "./actions";
+import { EditUserProfileInfoData } from "@/lib/types";
 
 const formSchema = z.object({
   name: z
@@ -39,34 +42,43 @@ const formSchema = z.object({
 const professionalStatusList = ["Free to Work", "Available", "Hiring"];
 
 export default function UserProfileInfoForm({
-  userId,
-  username,
+  profileInfo,
 }: {
-  userId: string;
-  username: string;
+  profileInfo: EditUserProfileInfoData;
 }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      showProfessionalStatus: false,
-      professionalStatus: "",
+      name: profileInfo.name,
+      showProfessionalStatus: profileInfo.showProfessionalStatus,
+      professionalStatus: profileInfo.professionalStatus,
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
 
     const formData = {
-      userId,
+      userId: profileInfo.userId,
+      username: profileInfo.username,
       name: values.name,
       showProfessionalStatus: values.showProfessionalStatus,
       professionalStatus: values.professionalStatus
         ? values.professionalStatus
         : "",
     };
+
+    const res = await editUserProfileInfo(formData);
+
+    if (res.success) {
+      toast.success(res.message);
+      setIsLoading(false);
+    } else {
+      toast.error(res.message);
+      setIsLoading(false);
+    }
   }
 
   return (
