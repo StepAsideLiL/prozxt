@@ -121,8 +121,9 @@ model Follow {
 model Profile {
   id String @id @unique @default(cuid())
 
-  name   String?
-  status String?
+  name                   String  @default("")
+  professionalStatus     String  @default("")
+  showProfessionalStatus Boolean @default(false)
 
   pinPostId String? @unique
   pinPost   Post?   @relation(references: [id], fields: [pinPostId])
