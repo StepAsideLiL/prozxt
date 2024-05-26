@@ -80,8 +80,11 @@ export default function ImgbbUploadForm({
   return (
     <section className="mx-auto max-w-3xl space-y-3">
       <form onSubmit={handleSubmit} className="space-y-8">
-        <Label htmlFor="profile">
-          <div className="relative size-40 cursor-pointer overflow-hidden rounded-full">
+        <Label
+          htmlFor="profile"
+          className="block size-40 cursor-pointer overflow-hidden rounded-full"
+        >
+          <div className="relative size-40 overflow-hidden">
             <Image
               src={selectedImage?.url || "/profile-picture-placeholder.jpeg"}
               alt="alt"
