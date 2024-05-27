@@ -138,7 +138,7 @@ export function HomeNav() {
             <Link
               href={menu.href}
               className={cn(
-                "inline-block px-4 py-2 hover:bg-muted/50",
+                "inline-block w-24 px-4 py-2 text-center hover:bg-muted/50",
                 menu.href === pathname && "bg-muted hover:bg-muted",
               )}
             >
