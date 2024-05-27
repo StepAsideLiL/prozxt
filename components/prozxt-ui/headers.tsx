@@ -18,13 +18,13 @@ export function HomeHeader() {
   return (
     <div className="border-b">
       <header className="container flex items-center justify-between py-3">
+        <div className="flex items-center justify-between gap-5">
+          <Logo size={24} variant="link" />
+
+          <h1 className="font-semibold">Home</h1>
+        </div>
+
         <div className="flex items-center gap-10">
-          <div className="flex items-center gap-5">
-            <Logo size={24} variant="link" />
-
-            <h1 className="font-semibold">Home</h1>
-          </div>
-
           <HomeNav />
         </div>
 
