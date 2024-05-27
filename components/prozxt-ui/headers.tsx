@@ -24,9 +24,7 @@ export function HomeHeader() {
           <h1 className="font-semibold">Home</h1>
         </div>
 
-        <div className="flex items-center gap-10">
-          <HomeNav />
-        </div>
+        <HomeNav />
 
         <div className="flex items-center gap-5">
           <ModeToggle />
