@@ -4,6 +4,7 @@ import UserActivities from "./_parts/user-activities";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import UserPins from "./_parts/user-pins";
+import { Separator } from "@/components/ui/separator";
 
 export default async function Page({
   params,
@@ -19,6 +20,8 @@ export default async function Page({
       <Suspense fallback={<UserActivitiesSkeleton />}>
         <UserActivities username={params.username} />
       </Suspense>
+
+      <Separator className="mx-auto max-w-3xl" />
 
       <Suspense fallback={<UserPinsSkeleton />}>
         <UserPins username={params.username} />
