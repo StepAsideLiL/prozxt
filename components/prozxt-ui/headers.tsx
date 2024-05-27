@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import ModeToggle from "@/components/prozxt-ui/mode-toggle";
 import { Logo } from "@/components/prozxt-ui/logo";
 import { getCurrentUser, getUserByUsername } from "@/lib/data/user";
