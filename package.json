@@ -17,6 +17,7 @@
     "@lexical/markdown": "^0.15.0",
     "@lexical/react": "^0.15.0",
     "@lexical/rich-text": "^0.15.0",
+    "@lexical/selection": "^0.15.0",
     "@lucia-auth/adapter-prisma": "^4.0.1",
     "@prisma/client": "5.14.0",
     "@radix-ui/react-avatar": "^1.0.4",
