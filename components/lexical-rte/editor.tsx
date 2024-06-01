@@ -23,8 +23,14 @@ export default function Editor({ placeholder }: { placeholder?: string }) {
         }
         ErrorBoundary={LexicalErrorBoundary}
       />
+
+      {/* "/" dropdown block picker menu */}
       <BlockPickerPlugin />
+
+      {/* Enable markdown shortcuts */}
       <MarkdownPlugin />
+
+      {/* Enable tab press indentation */}
       <TabIndentationPlugin />
 
       {/* List and Check list plugings */}
