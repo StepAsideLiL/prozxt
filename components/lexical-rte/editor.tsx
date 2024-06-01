@@ -6,6 +6,8 @@ import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
 import MarkdownPlugin from "./plugins/MarkdownPlugin";
 import BlockPickerPlugin from "./plugins/BlockPickerPlugin";
+import LinkPlugin from "./plugins/LinkPlugin";
+import LexicalAutoLinkPlugin from "./plugins/AutoLinkPlugin";
 
 export default function Editor({ placeholder }: { placeholder?: string }) {
   return (
@@ -36,6 +38,10 @@ export default function Editor({ placeholder }: { placeholder?: string }) {
       {/* List and Check list plugings */}
       <ListPlugin />
       <CheckListPlugin />
+
+      {/* Link plugins */}
+      <LinkPlugin />
+      <LexicalAutoLinkPlugin />
     </div>
   );
 }
