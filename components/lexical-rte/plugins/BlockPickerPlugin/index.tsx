@@ -1,3 +1,15 @@
+/**
+ * This plugin is a block picker that allows the user to select a block
+ * type from a list of options.
+ *
+ * It uses the LexicalTypeaheadMenuPlugin to display a list of options to the
+ * user, and provides a callback function to select the option and apply it to
+ * the current selection.
+ *
+ * The plugin also uses the useBasicTypeaheadTriggerMatch hook to detect when
+ * the user types a "/" character, which is used to trigger the typeahead menu.
+ */
+
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
   LexicalTypeaheadMenuPlugin,
@@ -26,6 +38,10 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+/**
+ * BlockPickerOption is a class that represents a menu option for the BlockPickerPlugin.
+ * It has a title, icon, keywords, and a callback function to select and insert block.
+ */
 class BlockPickerOption extends MenuOption {
   title: string;
   icon: LucideIcon;
@@ -51,6 +67,9 @@ class BlockPickerOption extends MenuOption {
   }
 }
 
+/**
+ * getBaseOptions returns array of block objects. Each block is defined using BlockPickerOption class.
+ */
 function getBaseOptions(editor: LexicalEditor) {
   return [
     new BlockPickerOption("Paragraph", {
