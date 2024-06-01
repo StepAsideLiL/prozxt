@@ -1,8 +1,10 @@
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
-import MarkdownPlugin from "./plugins/MarkdownPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
+import MarkdownPlugin from "./plugins/MarkdownPlugin";
 import BlockPickerPlugin from "./plugins/BlockPickerPlugin";
 
 export default function Editor({ placeholder }: { placeholder?: string }) {
@@ -24,6 +26,10 @@ export default function Editor({ placeholder }: { placeholder?: string }) {
       <BlockPickerPlugin />
       <MarkdownPlugin />
       <TabIndentationPlugin />
+
+      {/* List and Check list plugings */}
+      <ListPlugin />
+      <CheckListPlugin />
     </div>
   );
 }
