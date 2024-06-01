@@ -3,6 +3,7 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import MarkdownPlugin from "./plugins/MarkdownPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
+import BlockPickerPlugin from "./plugins/BlockPickerPlugin";
 
 export default function Editor({ placeholder }: { placeholder?: string }) {
   return (
@@ -20,6 +21,7 @@ export default function Editor({ placeholder }: { placeholder?: string }) {
         }
         ErrorBoundary={LexicalErrorBoundary}
       />
+      <BlockPickerPlugin />
       <MarkdownPlugin />
       <TabIndentationPlugin />
     </div>
