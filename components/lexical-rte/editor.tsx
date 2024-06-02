@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
@@ -9,7 +10,6 @@ import BlockPickerPlugin from "./plugins/BlockPickerPlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
 import LexicalAutoLinkPlugin from "./plugins/AutoLinkPlugin";
 import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
-import { useState } from "react";
 import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
 import LinkShortcutWithCtrlK from "./plugins/LinkShortcutWithCtrlK";
 
