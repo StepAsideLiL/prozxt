@@ -1,4 +1,6 @@
 import {
+  Check,
+  Edit,
   Heading1,
   Heading2,
   Heading3,
@@ -6,6 +8,8 @@ import {
   ListOrdered,
   ListTodo,
   Pilcrow,
+  Trash,
+  X,
 } from "lucide-react";
 
 export const icon = {
@@ -16,4 +20,9 @@ export const icon = {
   unorderedList: List,
   orderedList: ListOrdered,
   checkList: ListTodo,
+
+  closeX: X,
+  check: Check,
+  edit: Edit,
+  delete: Trash,
 };
