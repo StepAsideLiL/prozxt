@@ -58,7 +58,7 @@ export default function Editor({ placeholder }: { placeholder?: string }) {
       <LexicalAutoLinkPlugin />
       <LinkShortcutWithCtrlK setIsLinkEditMode={setIsLinkEditMode} />
 
-      {/* Floating toolbar and link editor field */}
+      {/* Floating toolbar and floating link editor field */}
       {floatingAnchorElem && (
         <>
           <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} />
