@@ -8,13 +8,26 @@ import MarkdownPlugin from "./plugins/MarkdownPlugin";
 import BlockPickerPlugin from "./plugins/BlockPickerPlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
 import LexicalAutoLinkPlugin from "./plugins/AutoLinkPlugin";
+import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
+import { useState } from "react";
+import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
 
 export default function Editor({ placeholder }: { placeholder?: string }) {
+  const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
+  const [floatingAnchorElem, setFloatingAnchorElem] =
+    useState<HTMLDivElement | null>(null);
+
+  const onRef = (_floatingAnchorElem: HTMLDivElement) => {
+    if (_floatingAnchorElem !== null) {
+      setFloatingAnchorElem(_floatingAnchorElem);
+    }
+  };
+
   return (
     <div className="relative">
       <RichTextPlugin
         contentEditable={
-          <div>
+          <div ref={onRef}>
             <ContentEditable className="h-96 focus-visible:outline-none" />
           </div>
         }
@@ -42,6 +55,18 @@ export default function Editor({ placeholder }: { placeholder?: string }) {
       {/* Link plugins */}
       <LinkPlugin />
       <LexicalAutoLinkPlugin />
+
+      {/* Floating toolbar and link editor field */}
+      {floatingAnchorElem && (
+        <>
+          <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} />
+          <FloatingLinkEditorPlugin
+            anchorElem={floatingAnchorElem}
+            isLinkEditMode={isLinkEditMode}
+            setIsLinkEditMode={setIsLinkEditMode}
+          />
+        </>
+      )}
     </div>
   );
 }
