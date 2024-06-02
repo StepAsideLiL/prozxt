@@ -11,6 +11,7 @@ import LexicalAutoLinkPlugin from "./plugins/AutoLinkPlugin";
 import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
 import { useState } from "react";
 import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
+import LinkShortcutWithCtrlK from "./plugins/LinkShortcutWithCtrlK";
 
 export default function Editor({ placeholder }: { placeholder?: string }) {
   const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
@@ -55,6 +56,7 @@ export default function Editor({ placeholder }: { placeholder?: string }) {
       {/* Link plugins */}
       <LinkPlugin />
       <LexicalAutoLinkPlugin />
+      <LinkShortcutWithCtrlK setIsLinkEditMode={setIsLinkEditMode} />
 
       {/* Floating toolbar and link editor field */}
       {floatingAnchorElem && (
