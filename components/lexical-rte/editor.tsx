@@ -5,6 +5,8 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+
 import MarkdownPlugin from "./plugins/MarkdownPlugin";
 import BlockPickerPlugin from "./plugins/BlockPickerPlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
@@ -16,7 +18,6 @@ import {
   SharedHistoryContext,
   useSharedHistoryContext,
 } from "./contexts/SharedHistoryContext";
-import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 
 export default function Editor({ placeholder }: { placeholder?: string }) {
   const { historyState } = useSharedHistoryContext();
