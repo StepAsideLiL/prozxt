@@ -50,8 +50,6 @@ export default function LinkShortcutWithCtrlK({
     }
   }, []);
 
-  console.log(selected);
-
   useEffect(() => {
     return editor.registerCommand(
       SELECTION_CHANGE_COMMAND,
