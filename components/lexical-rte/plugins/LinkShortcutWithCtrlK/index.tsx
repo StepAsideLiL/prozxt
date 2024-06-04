@@ -4,8 +4,10 @@
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
+  $createRangeSelection,
   $getSelection,
   $isRangeSelection,
+  $setSelection,
   COMMAND_PRIORITY_CRITICAL,
   COMMAND_PRIORITY_NORMAL,
   KEY_MODIFIER_COMMAND,
@@ -15,6 +17,7 @@ import { Dispatch, useCallback, useEffect, useState } from "react";
 import { sanitizeUrl } from "../../utils/url";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { getSelectedNode } from "../../utils/getSelectedNode";
+import { isSamePoint } from "../../utils/points";
 
 export default function LinkShortcutWithCtrlK({
   setIsLinkEditMode,
@@ -26,12 +29,15 @@ export default function LinkShortcutWithCtrlK({
   // Editor states.
   const [activeEditor, setActiveEditor] = useState(editor);
   const [isLink, setIsLink] = useState(false);
+  const [selected, setSelected] = useState(false);
 
   // Update the state of the toolbar
   const $updateToolbar = useCallback(() => {
     const selection = $getSelection();
-
     if ($isRangeSelection(selection)) {
+      const points = selection.getStartEndPoints();
+      setSelected(isSamePoint(points));
+
       const node = getSelectedNode(selection);
       const parent = node.getParent();
 
@@ -43,6 +49,8 @@ export default function LinkShortcutWithCtrlK({
       }
     }
   }, []);
+
+  console.log(selected);
 
   useEffect(() => {
     return editor.registerCommand(
@@ -66,7 +74,7 @@ export default function LinkShortcutWithCtrlK({
         if (code === "KeyK" && (ctrlKey || metaKey)) {
           event.preventDefault();
           let url: string | null;
-          if (!isLink) {
+          if (!isLink && !selected) {
             setIsLinkEditMode(true);
             url = sanitizeUrl("https://");
           } else {
@@ -79,7 +87,7 @@ export default function LinkShortcutWithCtrlK({
       },
       COMMAND_PRIORITY_NORMAL,
     );
-  }, [activeEditor, isLink, setIsLinkEditMode]);
+  }, [activeEditor, isLink, selected, setIsLinkEditMode]);
 
   return null;
 }
