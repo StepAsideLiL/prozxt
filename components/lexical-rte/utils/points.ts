@@ -13,10 +13,5 @@ export function isSamePoint(points: [PointType, PointType] | null | undefined) {
   const pointOne = points[0];
   const pointTwo = points[1];
 
-  console.log("pointOne.key => ", pointOne.key);
-  console.log("pointTwo.key => ", pointTwo.key);
-  console.log("pointOne.offset => ", pointOne.offset);
-  console.log("pointTwo.offset => ", pointTwo.offset);
-
   return pointOne.key === pointTwo.key && pointOne.offset === pointTwo.offset;
 }
