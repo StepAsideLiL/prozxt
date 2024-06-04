@@ -12,8 +12,15 @@ import LexicalAutoLinkPlugin from "./plugins/AutoLinkPlugin";
 import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
 import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
 import LinkShortcutWithCtrlK from "./plugins/LinkShortcutWithCtrlK";
+import {
+  SharedHistoryContext,
+  useSharedHistoryContext,
+} from "./contexts/SharedHistoryContext";
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 
 export default function Editor({ placeholder }: { placeholder?: string }) {
+  const { historyState } = useSharedHistoryContext();
+
   const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
   const [floatingAnchorElem, setFloatingAnchorElem] =
     useState<HTMLDivElement | null>(null);
@@ -26,49 +33,54 @@ export default function Editor({ placeholder }: { placeholder?: string }) {
 
   return (
     <div className="relative">
-      <RichTextPlugin
-        contentEditable={
-          <div ref={onRef}>
-            <ContentEditable className="h-96 focus-visible:outline-none" />
-          </div>
-        }
-        placeholder={
-          <div className="absolute top-0 -z-50 text-muted-foreground/50">
-            {placeholder || "Write..."}
-          </div>
-        }
-        ErrorBoundary={LexicalErrorBoundary}
-      />
+      <SharedHistoryContext>
+        <RichTextPlugin
+          contentEditable={
+            <div ref={onRef}>
+              <ContentEditable className="h-96 focus-visible:outline-none" />
+            </div>
+          }
+          placeholder={
+            <div className="absolute top-0 -z-50 text-muted-foreground/50">
+              {placeholder || "Write..."}
+            </div>
+          }
+          ErrorBoundary={LexicalErrorBoundary}
+        />
 
-      {/* "/" dropdown block picker menu */}
-      <BlockPickerPlugin />
+        {/* Undo and Redo plugin */}
+        <HistoryPlugin externalHistoryState={historyState} />
 
-      {/* Enable markdown shortcuts */}
-      <MarkdownPlugin />
+        {/* "/" dropdown block picker menu */}
+        <BlockPickerPlugin />
 
-      {/* Enable tab press indentation */}
-      <TabIndentationPlugin />
+        {/* Enable markdown shortcuts */}
+        <MarkdownPlugin />
 
-      {/* List and Check list plugings */}
-      <ListPlugin />
-      <CheckListPlugin />
+        {/* Enable tab press indentation */}
+        <TabIndentationPlugin />
 
-      {/* Link plugins */}
-      <LinkPlugin />
-      <LexicalAutoLinkPlugin />
-      <LinkShortcutWithCtrlK setIsLinkEditMode={setIsLinkEditMode} />
+        {/* List and Check list plugings */}
+        <ListPlugin />
+        <CheckListPlugin />
 
-      {/* Floating toolbar and floating link editor field */}
-      {floatingAnchorElem && (
-        <>
-          <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} />
-          <FloatingLinkEditorPlugin
-            anchorElem={floatingAnchorElem}
-            isLinkEditMode={isLinkEditMode}
-            setIsLinkEditMode={setIsLinkEditMode}
-          />
-        </>
-      )}
+        {/* Link plugins */}
+        <LinkPlugin />
+        <LexicalAutoLinkPlugin />
+        <LinkShortcutWithCtrlK setIsLinkEditMode={setIsLinkEditMode} />
+
+        {/* Floating toolbar and floating link editor field */}
+        {floatingAnchorElem && (
+          <>
+            <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} />
+            <FloatingLinkEditorPlugin
+              anchorElem={floatingAnchorElem}
+              isLinkEditMode={isLinkEditMode}
+              setIsLinkEditMode={setIsLinkEditMode}
+            />
+          </>
+        )}
+      </SharedHistoryContext>
     </div>
   );
 }
