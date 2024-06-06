@@ -17,7 +17,7 @@ import {
   X,
 } from "lucide-react";
 
-export const icon = {
+export const Icon = {
   paragraph: Pilcrow,
   h1: Heading1,
   h2: Heading2,
