@@ -25,7 +25,7 @@ import {
 } from "lexical";
 import { $setBlocksType } from "@lexical/selection";
 import { LucideIcon } from "lucide-react";
-import { icon } from "../../config/icons";
+import { Icon } from "../../config/icons";
 import { $createHeadingNode } from "@lexical/rich-text";
 import {
   INSERT_CHECK_LIST_COMMAND,
@@ -73,7 +73,7 @@ class BlockPickerOption extends MenuOption {
 function getBaseOptions(editor: LexicalEditor) {
   return [
     new BlockPickerOption("Paragraph", {
-      icon: icon.paragraph,
+      icon: Icon.paragraph,
       keywords: ["paragraph", "normal", "p", "text"],
       onSelect: () =>
         editor.update(() => {
@@ -84,7 +84,7 @@ function getBaseOptions(editor: LexicalEditor) {
         }),
     }),
     new BlockPickerOption("Heading 1", {
-      icon: icon.h1,
+      icon: Icon.h1,
       keywords: ["heading 1", "h1", "title", "h"],
       onSelect: () =>
         editor.update(() => {
@@ -95,7 +95,7 @@ function getBaseOptions(editor: LexicalEditor) {
         }),
     }),
     new BlockPickerOption("Heading", {
-      icon: icon.h2,
+      icon: Icon.h2,
       keywords: ["heading", "h2", "subtitle", "subtitle", "h"],
       onSelect: () =>
         editor.update(() => {
@@ -106,7 +106,7 @@ function getBaseOptions(editor: LexicalEditor) {
         }),
     }),
     new BlockPickerOption("Heading 3", {
-      icon: icon.h3,
+      icon: Icon.h3,
       keywords: ["heading 3", "h3", "subtitle", "h"],
       onSelect: () =>
         editor.update(() => {
@@ -117,19 +117,19 @@ function getBaseOptions(editor: LexicalEditor) {
         }),
     }),
     new BlockPickerOption("Bullet List", {
-      icon: icon.unorderedList,
+      icon: Icon.unorderedList,
       keywords: ["bulleted", "list", "ul", "unordered"],
       onSelect: () =>
         editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined),
     }),
     new BlockPickerOption("Numbered List", {
-      icon: icon.orderedList,
+      icon: Icon.orderedList,
       keywords: ["numbered list", "ordered list", "ol", "list"],
       onSelect: () =>
         editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined),
     }),
     new BlockPickerOption("Check List", {
-      icon: icon.checkList,
+      icon: Icon.checkList,
       keywords: ["check list", "todo list", "list"],
       onSelect: () =>
         editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined),
