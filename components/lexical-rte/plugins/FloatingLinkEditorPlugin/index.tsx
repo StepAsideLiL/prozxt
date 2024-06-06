@@ -27,7 +27,7 @@ import { sanitizeUrl } from "../../utils/url";
 import { LexicalLinkInput } from "../../ui/input";
 import { LexicalButton } from "../../ui/button";
 import Link from "next/link";
-import { icon } from "../../config/icons";
+import { Icon } from "../../config/icons";
 
 function FloatingLinkEditor({
   editor,
@@ -237,7 +237,7 @@ function FloatingLinkEditor({
               setIsLinkEditMode(false);
             }}
           >
-            <icon.closeX size={20} />
+            <Icon.closeX size={20} />
           </LexicalButton>
 
           <LexicalButton
@@ -247,7 +247,7 @@ function FloatingLinkEditor({
             onMouseDown={(event) => event.preventDefault()}
             onClick={handleLinkSubmission}
           >
-            <icon.check size={20} />
+            <Icon.check size={20} />
           </LexicalButton>
         </div>
       ) : (
@@ -272,7 +272,7 @@ function FloatingLinkEditor({
               setIsLinkEditMode(true);
             }}
           >
-            <icon.edit size={20} />
+            <Icon.edit size={20} />
           </LexicalButton>
 
           <LexicalButton
@@ -285,7 +285,7 @@ function FloatingLinkEditor({
               editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
             }}
           >
-            <icon.delete size={20} />
+            <Icon.delete size={20} />
           </LexicalButton>
         </div>
       )}

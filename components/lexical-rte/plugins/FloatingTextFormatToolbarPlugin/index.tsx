@@ -9,16 +9,17 @@ import {
   LexicalEditor,
   SELECTION_CHANGE_COMMAND,
 } from "lexical";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { getSelectedNode } from "../../utils/getSelectedNode";
-import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { $isCodeHighlightNode } from "@lexical/code";
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { mergeRegister } from "@lexical/utils";
 import { createPortal } from "react-dom";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+import { getSelectedNode } from "../../utils/getSelectedNode";
 import { getDOMRangeRect } from "../../utils/getDOMRangeRect";
 import { setFloatingElemPosition } from "../../utils/setFloatingElemPosition";
 import { LexicalToggle } from "../../ui/toggle";
-import { icon } from "../../config/icons";
+import { Icon } from "../../config/icons";
 
 function FloatingTextFormatToolbar({
   editor,
@@ -138,7 +139,7 @@ function FloatingTextFormatToolbar({
           editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
         }}
       >
-        <icon.bold size={16} />
+        <Icon.bold size={16} />
       </LexicalToggle>
       <LexicalToggle
         pressed={isItalic ? true : false}
@@ -147,7 +148,7 @@ function FloatingTextFormatToolbar({
           editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
         }}
       >
-        <icon.italic size={16} />
+        <Icon.italic size={16} />
       </LexicalToggle>
       <LexicalToggle
         pressed={isUnderline ? true : false}
@@ -156,7 +157,7 @@ function FloatingTextFormatToolbar({
           editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
         }}
       >
-        <icon.underline size={16} />
+        <Icon.underline size={16} />
       </LexicalToggle>
       <LexicalToggle
         pressed={isCode ? true : false}
@@ -165,14 +166,14 @@ function FloatingTextFormatToolbar({
           editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
         }}
       >
-        <icon.code size={16} />
+        <Icon.code size={16} />
       </LexicalToggle>
       <LexicalToggle
         pressed={isLink ? true : false}
         aria-label="Toggle italic"
         onClick={insertLink}
       >
-        <icon.link size={16} />
+        <Icon.link size={16} />
       </LexicalToggle>
     </div>
   );
