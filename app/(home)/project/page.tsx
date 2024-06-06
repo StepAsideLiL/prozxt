@@ -28,6 +28,7 @@ async function Projects() {
               postTitle={project.title}
               postId={project.id}
               postCreatedAt={project.createdAt}
+              postType="project"
             />
           ))}
         </section>
