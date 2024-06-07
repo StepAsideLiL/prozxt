@@ -12,6 +12,8 @@ import {
   ListOrdered,
   ListTodo,
   Pilcrow,
+  Quote,
+  SquareTerminal,
   Trash,
   Underline,
   X,
@@ -25,6 +27,8 @@ export const Icon = {
   unorderedList: List,
   orderedList: ListOrdered,
   checkList: ListTodo,
+  quote: Quote,
+  codeBlock: SquareTerminal,
 
   bold: Bold,
   italic: Italic,
