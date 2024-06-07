@@ -1,5 +1,6 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
+  $createParagraphNode,
   $getSelection,
   $isParagraphNode,
   $isRangeSelection,
@@ -20,6 +21,167 @@ import { getDOMRangeRect } from "../../utils/getDOMRangeRect";
 import { setFloatingElemPosition } from "../../utils/setFloatingElemPosition";
 import { LexicalToggle } from "../../ui/toggle";
 import { Icon } from "../../config/icons";
+import {
+  LexicalDropdownMenu,
+  LexicalDropdownMenuContent,
+  LexicalDropdownMenuItem,
+  LexicalDropdownMenuTrigger,
+} from "../../ui/dropdown-menu";
+import { LexicalButton } from "../../ui/button";
+import { $setBlocksType } from "@lexical/selection";
+import {
+  $createHeadingNode,
+  $createQuoteNode,
+  HeadingTagType,
+} from "@lexical/rich-text";
+import {
+  INSERT_CHECK_LIST_COMMAND,
+  INSERT_ORDERED_LIST_COMMAND,
+  INSERT_UNORDERED_LIST_COMMAND,
+} from "@lexical/list";
+
+const blockTypeToBlockName = {
+  paragraph: "Normal",
+  h1: "Heading 1",
+  h2: "Heading 2",
+  h3: "Heading 3",
+  bullet: "Bulleted List",
+  number: "Numbered List",
+  check: "Check List",
+  quote: "Quote",
+  code: "Code Block",
+};
+type BlockType = keyof typeof blockTypeToBlockName;
+
+function BlockTurnintoDropdown({
+  editor,
+  blockType,
+}: {
+  editor: LexicalEditor;
+  blockType: BlockType;
+}) {
+  const formatParagraph = () => {
+    editor.update(() => {
+      const selection = $getSelection();
+      if ($isRangeSelection(selection)) {
+        $setBlocksType(selection, () => $createParagraphNode());
+      }
+    });
+  };
+  const formatHeading = (headingSize: HeadingTagType) => {
+    if (blockType !== headingSize) {
+      editor.update(() => {
+        const selection = $getSelection();
+        $setBlocksType(selection, () => $createHeadingNode(headingSize));
+      });
+    }
+  };
+  const formatBulletList = () => {
+    if (blockType !== "bullet") {
+      editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
+    } else {
+      formatParagraph();
+    }
+  };
+  const formatNumberedList = () => {
+    if (blockType !== "number") {
+      editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
+    } else {
+      formatParagraph();
+    }
+  };
+  const formatCheckList = () => {
+    if (blockType !== "check") {
+      editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined);
+    } else {
+      formatParagraph();
+    }
+  };
+  const formatQuote = () => {
+    if (blockType !== "quote") {
+      editor.update(() => {
+        const selection = $getSelection();
+        $setBlocksType(selection, () => $createQuoteNode());
+      });
+    }
+  };
+
+  return (
+    <LexicalDropdownMenu>
+      <LexicalDropdownMenuTrigger>
+        <LexicalButton variant={"ghost"}>
+          {blockTypeToBlockName[blockType]}
+        </LexicalButton>
+      </LexicalDropdownMenuTrigger>
+
+      <LexicalDropdownMenuContent>
+        <LexicalDropdownMenuItem
+          className="flex cursor-pointer items-center gap-2"
+          onClick={() => formatParagraph()}
+        >
+          <Icon.paragraph size={16} />
+          <span className="text">Normal</span>
+        </LexicalDropdownMenuItem>
+
+        <LexicalDropdownMenuItem
+          className="flex cursor-pointer items-center gap-2"
+          onClick={() => formatHeading("h1")}
+        >
+          <Icon.h1 size={16} />
+          <span className="text">Heading 1</span>
+        </LexicalDropdownMenuItem>
+
+        <LexicalDropdownMenuItem
+          className="flex cursor-pointer items-center gap-2"
+          onClick={() => formatHeading("h2")}
+        >
+          <Icon.h2 size={16} />
+          <span className="text">Heading 2</span>
+        </LexicalDropdownMenuItem>
+
+        <LexicalDropdownMenuItem
+          className="flex cursor-pointer items-center gap-2"
+          onClick={() => formatHeading("h3")}
+        >
+          <Icon.h3 size={16} />
+          <span className="text">Heading 3</span>
+        </LexicalDropdownMenuItem>
+
+        <LexicalDropdownMenuItem
+          className="flex cursor-pointer items-center gap-2"
+          onClick={() => formatBulletList()}
+        >
+          <Icon.unorderedList size={16} />
+          <span className="text">Bullet List</span>
+        </LexicalDropdownMenuItem>
+
+        <LexicalDropdownMenuItem
+          className="flex cursor-pointer items-center gap-2"
+          onClick={() => formatNumberedList()}
+        >
+          <Icon.orderedList size={16} />
+          <span className="text">Number List</span>
+        </LexicalDropdownMenuItem>
+
+        <LexicalDropdownMenuItem
+          className="flex cursor-pointer items-center gap-2"
+          onClick={() => formatCheckList()}
+        >
+          <Icon.checkList size={16} />
+          <span className="text">Check List</span>
+        </LexicalDropdownMenuItem>
+
+        <LexicalDropdownMenuItem
+          className="flex cursor-pointer items-center gap-2"
+          onClick={() => formatQuote()}
+        >
+          <Icon.quote size={16} />
+          <span className="text">Quote</span>
+        </LexicalDropdownMenuItem>
+      </LexicalDropdownMenuContent>
+    </LexicalDropdownMenu>
+  );
+}
 
 function FloatingTextFormatToolbar({
   editor,
@@ -45,6 +207,7 @@ function FloatingTextFormatToolbar({
   // isSuperscript: boolean;
 }) {
   const popupCharStylesEditorRef = useRef<HTMLDivElement>(null);
+  const [blockType, setBlockType] = useState<BlockType>("paragraph");
 
   const insertLink = useCallback(() => {
     if (!isLink) {
@@ -132,6 +295,8 @@ function FloatingTextFormatToolbar({
       ref={popupCharStylesEditorRef}
       className="absolute left-0 top-0 flex border bg-background"
     >
+      <BlockTurnintoDropdown editor={editor} blockType={blockType} />
+
       <LexicalToggle
         pressed={isBold ? true : false}
         aria-label="Toggle Bold"
