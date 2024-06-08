@@ -19,7 +19,7 @@ import {
   mergeRegister,
 } from "@lexical/utils";
 import { createPortal } from "react-dom";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Dispatch, useCallback, useEffect, useRef, useState } from "react";
 
 import { getSelectedNode } from "../../utils/getSelectedNode";
 import { getDOMRangeRect } from "../../utils/getDOMRangeRect";
@@ -200,6 +200,7 @@ function FloatingTextFormatToolbar({
   isUnderline,
   isLink,
   isCode,
+  setIsLinkEditMode,
 }: // isStrikethrough,
 // isSubscript,
 // isSuperscript,
@@ -212,6 +213,7 @@ function FloatingTextFormatToolbar({
   isUnderline: boolean;
   isLink: boolean;
   isCode: boolean;
+  setIsLinkEditMode: Dispatch<boolean>;
   // isStrikethrough: boolean;
   // isSubscript: boolean;
   // isSuperscript: boolean;
@@ -220,11 +222,12 @@ function FloatingTextFormatToolbar({
 
   const insertLink = useCallback(() => {
     if (!isLink) {
+      setIsLinkEditMode(true);
       editor.dispatchCommand(TOGGLE_LINK_COMMAND, "https://");
     } else {
       editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
     }
-  }, [editor, isLink]);
+  }, [editor, isLink, setIsLinkEditMode]);
 
   const updateTextFormatFloatingToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -355,8 +358,12 @@ function FloatingTextFormatToolbar({
 
 export default function FloatingTextFormatToolbarPlugin({
   anchorElem = document.body,
+  isLinkEditMode,
+  setIsLinkEditMode,
 }: {
   anchorElem: HTMLElement;
+  isLinkEditMode: boolean;
+  setIsLinkEditMode: Dispatch<boolean>;
 }) {
   const [editor] = useLexicalComposerContext();
 
@@ -491,7 +498,7 @@ export default function FloatingTextFormatToolbarPlugin({
     );
   }, [editor, updatePopup]);
 
-  if (!isText) {
+  if (!isText || isLinkEditMode) {
     return null;
   }
 
@@ -505,6 +512,7 @@ export default function FloatingTextFormatToolbarPlugin({
       isUnderline={isUnderline}
       isLink={isLink}
       isCode={isCode}
+      setIsLinkEditMode={setIsLinkEditMode}
       // isStrikethrough={isStrikethrough}
       // isSubscript={isSubscript}
       // isSuperscript={isSuperscript}
