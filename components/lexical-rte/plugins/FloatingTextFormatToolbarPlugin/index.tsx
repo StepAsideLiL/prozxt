@@ -4,6 +4,7 @@ import {
   $getSelection,
   $isParagraphNode,
   $isRangeSelection,
+  $isRootOrShadowRoot,
   $isTextNode,
   COMMAND_PRIORITY_LOW,
   FORMAT_TEXT_COMMAND,
@@ -12,7 +13,11 @@ import {
 } from "lexical";
 import { $isCodeHighlightNode } from "@lexical/code";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
-import { mergeRegister } from "@lexical/utils";
+import {
+  $findMatchingParent,
+  $getNearestNodeOfType,
+  mergeRegister,
+} from "@lexical/utils";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -32,12 +37,15 @@ import { $setBlocksType } from "@lexical/selection";
 import {
   $createHeadingNode,
   $createQuoteNode,
+  $isHeadingNode,
   HeadingTagType,
 } from "@lexical/rich-text";
 import {
+  $isListNode,
   INSERT_CHECK_LIST_COMMAND,
   INSERT_ORDERED_LIST_COMMAND,
   INSERT_UNORDERED_LIST_COMMAND,
+  ListNode,
 } from "@lexical/list";
 
 const blockTypeToBlockName = {
@@ -186,6 +194,7 @@ function BlockTurnintoDropdown({
 function FloatingTextFormatToolbar({
   editor,
   anchorElem = document.body,
+  blockType,
   isBold,
   isItalic,
   isUnderline,
@@ -197,6 +206,7 @@ function FloatingTextFormatToolbar({
 {
   editor: LexicalEditor;
   anchorElem?: HTMLElement;
+  blockType: BlockType;
   isBold: boolean;
   isItalic: boolean;
   isUnderline: boolean;
@@ -207,7 +217,6 @@ function FloatingTextFormatToolbar({
   // isSuperscript: boolean;
 }) {
   const popupCharStylesEditorRef = useRef<HTMLDivElement>(null);
-  const [blockType, setBlockType] = useState<BlockType>("paragraph");
 
   const insertLink = useCallback(() => {
     if (!isLink) {
@@ -361,6 +370,8 @@ export default function FloatingTextFormatToolbarPlugin({
   // const [isSuperscript, setIsSuperscript] = useState(false);
   const [isCode, setIsCode] = useState(false);
 
+  const [blockType, setBlockType] = useState<BlockType>("paragraph");
+
   const updatePopup = useCallback(() => {
     editor.getEditorState().read(() => {
       if (editor.isComposing()) {
@@ -418,6 +429,45 @@ export default function FloatingTextFormatToolbarPlugin({
         setIsText(false);
         return;
       }
+
+      // Set block type
+      if ($isRangeSelection(selection)) {
+        const anchorNode = selection.anchor.getNode();
+        let element =
+          anchorNode.getKey() === "root"
+            ? anchorNode
+            : $findMatchingParent(anchorNode, (e) => {
+                const parent = e.getParent();
+                return parent !== null && $isRootOrShadowRoot(parent);
+              });
+
+        if (element === null) {
+          element = anchorNode.getTopLevelElementOrThrow();
+        }
+
+        const elementKey = element.getKey();
+        const elementDOM = editor.getElementByKey(elementKey);
+
+        if (elementDOM !== null) {
+          if ($isListNode(element)) {
+            const parentList = $getNearestNodeOfType<ListNode>(
+              anchorNode,
+              ListNode,
+            );
+            const type = parentList
+              ? parentList.getListType()
+              : element.getListType();
+            setBlockType(type);
+          } else {
+            const type = $isHeadingNode(element)
+              ? element.getTag()
+              : element.getType();
+            if (type in blockTypeToBlockName) {
+              setBlockType(type as keyof typeof blockTypeToBlockName);
+            }
+          }
+        }
+      }
     });
   }, [editor]);
 
@@ -449,6 +499,7 @@ export default function FloatingTextFormatToolbarPlugin({
     <FloatingTextFormatToolbar
       editor={editor}
       anchorElem={anchorElem}
+      blockType={blockType}
       isBold={isBold}
       isItalic={isItalic}
       isUnderline={isUnderline}
