@@ -73,7 +73,11 @@ export default function Editor({ placeholder }: { placeholder?: string }) {
         {/* Floating toolbar and floating link editor field */}
         {floatingAnchorElem && (
           <>
-            <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} />
+            <FloatingTextFormatToolbarPlugin
+              anchorElem={floatingAnchorElem}
+              isLinkEditMode={isLinkEditMode}
+              setIsLinkEditMode={setIsLinkEditMode}
+            />
             <FloatingLinkEditorPlugin
               anchorElem={floatingAnchorElem}
               isLinkEditMode={isLinkEditMode}
